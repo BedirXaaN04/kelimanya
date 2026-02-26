@@ -8,6 +8,11 @@ class GameProvider extends ChangeNotifier {
   int currentLevelIndex = 0;
   List<String> foundWords = [];
   List<String> currentSelectedLetters = [];
+  List<String> currentShuffledLetters = [];
+  
+  // Tasks and Gifts
+  int tasksCompletedLimit = 5;
+  bool isGiftClaimedToday = false;
   
   LevelModel get currentLevel => gameLevels[currentLevelIndex % gameLevels.length];
 
@@ -19,6 +24,14 @@ class GameProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     totalCoins = prefs.getInt('coins') ?? 200;
     currentLevelIndex = prefs.getInt('level') ?? 0;
+    
+    String? lastGiftDate = prefs.getString('lastGiftDate');
+    String today = DateTime.now().toIso8601String().split('T')[0];
+    if (lastGiftDate == today) {
+      isGiftClaimedToday = true;
+    }
+    
+    currentShuffledLetters = List.from(currentLevel.letters);
     notifyListeners();
   }
 
@@ -26,6 +39,33 @@ class GameProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('coins', totalCoins);
     await prefs.setInt('level', currentLevelIndex);
+  }
+
+  void shuffleLetters() {
+    currentShuffledLetters.shuffle();
+    notifyListeners();
+  }
+  
+  void claimDailyGift() async {
+    if (!isGiftClaimedToday) {
+      totalCoins += 50;
+      isGiftClaimedToday = true;
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('lastGiftDate', DateTime.now().toIso8601String().split('T')[0]);
+      _saveData();
+      notifyListeners();
+    }
+  }
+
+  int get completedTasksProgress => currentLevelIndex % tasksCompletedLimit;
+  
+  void claimTaskReward() {
+    if (completedTasksProgress == 0 && currentLevelIndex > 0) {
+      // Reward logic can be handled here if tasks were more complex
+      totalCoins += 100;
+      _saveData();
+      notifyListeners();
+    }
   }
 
   void addSelectedLetter(String letter) {
@@ -69,6 +109,7 @@ class GameProvider extends ChangeNotifier {
     totalCoins += 50;
     foundWords.clear();
     currentSelectedLetters.clear();
+    currentShuffledLetters = List.from(currentLevel.letters);
     _saveData();
     notifyListeners();
     

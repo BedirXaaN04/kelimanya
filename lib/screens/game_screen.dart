@@ -104,7 +104,7 @@ class GameScreen extends StatelessWidget {
                 clipBehavior: Clip.none,
                 alignment: Alignment.bottomCenter,
                 children: [
-                  InteractiveWheel(letters: provider.currentLevel.letters),
+                  InteractiveWheel(letters: provider.currentShuffledLetters),
                   Positioned(
                     right: 0,
                     bottom: 0,
@@ -118,7 +118,7 @@ class GameScreen extends StatelessWidget {
                         BrutalistButton(
                           padding: 10,
                           onPressed: () {
-                            // Shuffling logic can be implemented by adding a shuffle method to provider and passing shuffled letters
+                             provider.shuffleLetters();
                           },
                           child: const Text("🔀", style: TextStyle(fontSize: 24)),
                         ),

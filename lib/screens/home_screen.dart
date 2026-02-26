@@ -131,7 +131,52 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      _showModal(context, "GÖREVLER", const Text("Görevler yakında...", style: TextStyle(fontWeight: FontWeight.bold)));
+                      int progress = provider.completedTasksProgress;
+                      int limit = provider.tasksCompletedLimit;
+                      _showModal(context, "GÖREVLER", Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                           const Text("5 Seviye Tamamla", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                           const SizedBox(height: 10),
+                           Stack(
+                             children: [
+                               Container(
+                                 height: 20,
+                                 width: double.infinity,
+                                 decoration: BoxDecoration(
+                                   color: Colors.grey.shade300,
+                                   borderRadius: BorderRadius.circular(10),
+                                   border: Border.all(color: BrutalistTheme.black, width: 2.5),
+                                 ),
+                               ),
+                               FractionallySizedBox(
+                                 widthFactor: progress / limit,
+                                 child: Container(
+                                   height: 20,
+                                   decoration: BoxDecoration(
+                                     color: BrutalistTheme.accentGreen,
+                                     borderRadius: BorderRadius.circular(10),
+                                   ),
+                                 ),
+                               ),
+                             ],
+                           ),
+                           const SizedBox(height: 10),
+                           Text("$progress / $limit"),
+                           const SizedBox(height: 20),
+                           BrutalistButton(
+                             backgroundColor: progress == 0 && provider.currentLevelIndex > 0 ? BrutalistTheme.accentYellow : Colors.grey.shade300,
+                             onPressed: () {
+                                if (progress == 0 && provider.currentLevelIndex > 0) {
+                                  provider.claimTaskReward();
+                                  Navigator.of(context).pop();
+                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Görev Ödülü Alındı!")));
+                                }
+                             },
+                             child: const Text("ÖDÜLÜ AL (100 🪙)", style: TextStyle(fontWeight: FontWeight.bold)),
+                           ),
+                        ],
+                      ));
                     },
                     child: const BrutalistBox(
                       padding: 10,
@@ -141,7 +186,24 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 15),
                   GestureDetector(
                     onTap: () {
-                      _showModal(context, "HEDİYE", const Text("Günlük ödül yakında...", style: TextStyle(fontWeight: FontWeight.bold)));
+                      _showModal(context, "GÜNLÜK HEDİYE", Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                           const Text("Her gün giriş yap, 50 altın kazan!", style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+                           const SizedBox(height: 20),
+                           BrutalistButton(
+                             backgroundColor: provider.isGiftClaimedToday ? Colors.grey.shade300 : BrutalistTheme.accentYellow,
+                             onPressed: () {
+                               if (!provider.isGiftClaimedToday) {
+                                 provider.claimDailyGift();
+                                 Navigator.of(context).pop();
+                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("50 Altın Eklendi!")));
+                               }
+                             },
+                             child: Text(provider.isGiftClaimedToday ? "ALINDI" : "HEDİYEYİ AL", style: const TextStyle(fontWeight: FontWeight.bold)),
+                           ),
+                        ],
+                      ));
                     },
                     child: const BrutalistBox(
                       padding: 10,
