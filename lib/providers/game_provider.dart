@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../models/level_model.dart';
 import '../services/ad_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class GameProvider extends ChangeNotifier {
   int totalCoins = 200;
@@ -32,6 +34,21 @@ class GameProvider extends ChangeNotifier {
     }
     
     currentShuffledLetters = List.from(currentLevel.letters);
+    
+    // Remote Sync if Authenticated
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      try {
+        final doc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+        if (doc.exists) {
+          totalCoins = doc.data()?['coins'] ?? totalCoins;
+          currentLevelIndex = doc.data()?['level'] ?? currentLevelIndex;
+        }
+      } catch (e) {
+        debugPrint("Error loading from Firestore: $e");
+      }
+    }
+    
     notifyListeners();
   }
 
@@ -39,6 +56,22 @@ class GameProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('coins', totalCoins);
     await prefs.setInt('level', currentLevelIndex);
+    
+    // Remote Sync if Authenticated
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      try {
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'coins': totalCoins,
+          'level': currentLevelIndex,
+          'email': user.email,
+          'displayName': user.displayName,
+          'lastUpdated': FieldValue.serverTimestamp(),
+        }, SetOptions(merge: true));
+      } catch (e) {
+        debugPrint("Error saving to Firestore: $e");
+      }
+    }
   }
 
   void shuffleLetters() {

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/game_provider.dart';
 import '../theme/brutalist_theme.dart';
 import 'game_screen.dart';
+import 'leaderboard_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -208,6 +209,16 @@ class HomeScreen extends StatelessWidget {
                     child: const BrutalistBox(
                       padding: 10,
                       child: Text("🎁", style: TextStyle(fontSize: 26)),
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  GestureDetector(
+                    onTap: () {
+                       Navigator.push(context, MaterialPageRoute(builder: (_) => const LeaderboardScreen()));
+                    },
+                    child: const BrutalistBox(
+                      padding: 10,
+                      child: Text("🏆", style: TextStyle(fontSize: 26)),
                     ),
                   ),
                 ],
