@@ -39,6 +39,7 @@ jobs:
           cp android/app/google-services.json /tmp/android_backup/app/ || true
           cp android/app/src/main/AndroidManifest.xml /tmp/android_backup/app/src/main/ || true
           
+          rm -rf android/
           yes | flutter create . --platforms android || true
           
           cp /tmp/android_backup/build.gradle android/build.gradle || true
