@@ -21,12 +21,11 @@ class LetterBox extends StatelessWidget {
     Color bgColor = isFound ? BrutalistTheme.accentYellow : BrutalistTheme.white;
     Color textColor = isFound || isHinted ? BrutalistTheme.black : Colors.transparent;
     double scale = isFound ? 1.05 : 1.0;
-    BorderStyle bStyle = isHinted && !isFound ? BorderStyle.values[1] : BorderStyle.solid; // fake dashed using solid or custom if needed
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOutBack,
-      transform: Matrix4.identity()..scale(scale),
+      transform: Matrix4.identity()..scale(scale, scale, 1.0),
       transformAlignment: Alignment.center,
       width: 46,
       height: 46,

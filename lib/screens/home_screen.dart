@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   void _showModal(BuildContext context, String title, Widget content) {
     showDialog(
       context: context,
-      barrierColor: Colors.black.withOpacity(0.75),
+      barrierColor: Colors.black.withValues(alpha: 0.75),
       builder: (context) {
         return Center(
           child: Material(

@@ -13,7 +13,7 @@ class GameScreen extends StatelessWidget {
     showDialog(
       context: context,
       barrierDismissible: false,
-      barrierColor: Colors.black.withOpacity(0.75),
+      barrierColor: Colors.black.withValues(alpha: 0.75),
       builder: (context) {
         return Center(
           child: Material(

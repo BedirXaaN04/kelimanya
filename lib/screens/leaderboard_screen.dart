@@ -8,10 +8,10 @@ class LeaderboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: BrutalistTheme.backgroundBlue,
+      backgroundColor: BrutalistTheme.bgBlue,
       appBar: AppBar(
         title: const Text('TR SIRALAMASI', style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: BrutalistTheme.backgroundBlue,
+        backgroundColor: BrutalistTheme.bgBlue,
         elevation: 0,
       ),
       body: StreamBuilder<QuerySnapshot>(
