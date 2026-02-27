@@ -189,7 +189,7 @@ class _InteractiveWheelState extends State<InteractiveWheel> {
                         BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4)),
                       ],
                     ),
-                    transform: isSelected ? (Matrix4.identity()..translate(4.0, 4.0, 0.0)..scale(0.92, 0.92, 1.0)) : Matrix4.identity(),
+                    transform: isSelected ? Matrix4.translationValues(4.0, 4.0, 0.0) : Matrix4.identity(),
                     child: Center(
                       child: Text(
                         widget.letters[i],

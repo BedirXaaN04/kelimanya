@@ -25,8 +25,6 @@ class LetterBox extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOutBack,
-      transform: Matrix4.identity()..scale(scale, scale, 1.0),
-      transformAlignment: Alignment.center,
       width: 46,
       height: 46,
       decoration: BoxDecoration(
@@ -46,13 +44,16 @@ class LetterBox extends StatelessWidget {
           ),
         ],
       ),
-      child: Center(
-        child: Text(
-          letter.toUpperCase(),
-          style: TextStyle(
-            fontSize: 26,
-            fontWeight: FontWeight.w900,
-            color: textColor,
+      child: Transform.scale(
+        scale: scale,
+        child: Center(
+          child: Text(
+            letter.toUpperCase(),
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.w900,
+              color: textColor,
+            ),
           ),
         ),
       ),
