@@ -1,0 +1,95 @@
+﻿Resolving dependencies...
+Downloading packages...
+  _flutterfire_internals 1.3.59 (1.3.66 available)
+  characters 1.4.0 (1.4.1 available)
+  cloud_firestore 5.6.12 (6.1.2 available)
+  cloud_firestore_platform_interface 6.6.12 (7.0.6 available)
+  cloud_firestore_web 4.4.12 (5.1.2 available)
+  firebase_auth 5.7.0 (6.1.4 available)
+  firebase_auth_platform_interface 7.7.3 (8.1.6 available)
+  firebase_auth_web 5.15.3 (6.1.2 available)
+  firebase_core 3.15.2 (4.4.0 available)
+  firebase_core_web 2.24.1 (3.4.0 available)
+  firebase_messaging 15.2.10 (16.1.1 available)
+  firebase_messaging_platform_interface 4.6.10 (4.7.6 available)
+  firebase_messaging_web 3.10.10 (4.1.2 available)
+  flutter_lints 4.0.0 (6.0.0 available)
+  google_fonts 6.3.3 (8.0.2 available)
+  google_mobile_ads 5.3.1 (7.0.0 available)
+  google_sign_in 6.3.0 (7.2.0 available)
+  google_sign_in_android 6.2.1 (7.2.9 available)
+  google_sign_in_ios 5.9.0 (6.3.0 available)
+  google_sign_in_platform_interface 2.5.0 (3.1.0 available)
+  google_sign_in_web 0.12.4+4 (1.1.2 available)
+  lints 4.0.0 (6.1.0 available)
+  matcher 0.12.17 (0.12.19 available)
+  material_color_utilities 0.11.1 (0.13.0 available)
+  meta 1.17.0 (1.18.1 available)
+  test_api 0.7.7 (0.7.10 available)
+Got dependencies!
+26 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Analyzing Kelimanya...                                          
+
+   info - Parameter 'key' could be a super parameter - lib\main.dart:39:9 - use_super_parameters
+warning - The value of the local variable 'cx' isn't used - lib\providers\game_provider.dart:102:15 - unused_local_variable
+warning - The value of the local variable 'cy' isn't used - lib\providers\game_provider.dart:103:15 - unused_local_variable
+warning - The value of the local variable 'cx' isn't used - lib\providers\game_provider.dart:224:19 - unused_local_variable
+warning - The value of the local variable 'cy' isn't used - lib\providers\game_provider.dart:225:19 - unused_local_variable
+   info - Don't use 'BuildContext's across async gaps - lib\screens\game_screen.dart:116:38 - use_build_context_synchronously
+  error - The method '_DottedBgPainter' isn't defined for the type '_GameScreenState' - lib\screens\game_screen.dart:129:26 - undefined_method
+  error - The method '_buildBonusButton' isn't defined for the type '_GameScreenState' - lib\screens\game_screen.dart:195:25 - undefined_method
+  error - The method '_buildUndoButton' isn't defined for the type '_GameScreenState' - lib\screens\game_screen.dart:196:25 - undefined_method
+  error - The method '_buildGiftButton' isn't defined for the type '_GameScreenState' - lib\screens\game_screen.dart:197:25 - undefined_method
+warning - Dead code - lib\screens\game_screen.dart:370:3 - dead_code
+   info - The local variable '_buildUndoButton' starts with an underscore - lib\screens\game_screen.dart:370:10 - no_leading_underscores_for_local_identifiers
+warning - The declaration '_buildUndoButton' isn't referenced - lib\screens\game_screen.dart:370:10 - unused_element
+   info - The local variable '_buildBonusButton' starts with an underscore - lib\screens\game_screen.dart:388:10 - no_leading_underscores_for_local_identifiers
+warning - The declaration '_buildBonusButton' isn't referenced - lib\screens\game_screen.dart:388:10 - unused_element
+  error - Local variable '_showBonusModal' can't be referenced before it is declared - lib\screens\game_screen.dart:391:20 - referenced_before_declaration
+   info - The local variable '_buildGiftButton' starts with an underscore - lib\screens\game_screen.dart:421:10 - no_leading_underscores_for_local_identifiers
+warning - The declaration '_buildGiftButton' isn't referenced - lib\screens\game_screen.dart:421:10 - unused_element
+warning - The member 'notifyListeners' can only be used within 'package:flutter/src/foundation/change_notifier.dart' or a test - lib\screens\game_screen.dart:428:22 - invalid_use_of_visible_for_testing_member
+warning - The member 'notifyListeners' can only be used within instance members of subclasses of 'ChangeNotifier' - lib\screens\game_screen.dart:428:22 - invalid_use_of_protected_member
+   info - The local variable '_showBonusModal' starts with an underscore - lib\screens\game_screen.dart:448:8 - no_leading_underscores_for_local_identifiers
+  error - The named parameter 'textAlign' isn't defined - lib\screens\game_screen.dart:473:109 - undefined_named_parameter
+  error - Classes can't be declared inside other classes - lib\screens\game_screen.dart:513:1 - class_in_class
+  error - Expected a class member - lib\screens\game_screen.dart:513:24 - expected_class_member
+   info - The variable name 'CustomPainter' isn't a lowerCamelCase identifier - lib\screens\game_screen.dart:513:32 - non_constant_identifier_names
+  error - Methods must have an explicit list of parameters - lib\screens\game_screen.dart:513:32 - missing_method_parameters
+warning - The declaration 'paint' isn't referenced - lib\screens\game_screen.dart:515:8 - unused_element
+warning - The declaration 'shouldRepaint' isn't referenced - lib\screens\game_screen.dart:529:8 - unused_element
+  error - The 'covariant' keyword can only be used for parameters in instance methods or before non-final instance fields - lib\screens\game_screen.dart:529:22 - invalid_use_of_covariant
+  error - CustomPainter isn't a type - lib\screens\game_screen.dart:529:32 - not_a_type
+  error - Expected to find '}' - lib\screens\game_screen.dart:531:1 - expected_token
+   info - Parameter 'key' could be a super parameter - lib\screens\home_screen.dart:11:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter - lib\screens\leaderboard_screen.dart:6:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter - lib\screens\login_screen.dart:8:9 - use_super_parameters
+   info - Unnecessary braces in a string interpolation - lib\services\auth_service.dart:32:54 - unnecessary_brace_in_string_interps
+   info - Unnecessary braces in a string interpolation - lib\services\auth_service.dart:72:54 - unnecessary_brace_in_string_interps
+   info - Parameter 'key' could be a super parameter - lib\theme\brutalist_theme.dart:44:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter - lib\theme\brutalist_theme.dart:89:9 - use_super_parameters
+   info - Invalid use of a private type in a public API - lib\theme\brutalist_theme.dart:98:3 - library_private_types_in_public_api
+   info - Use 'const' for final variables initialized to a constant value - lib\widgets\animated_owl.dart:58:5 - prefer_const_declarations
+   info - Use 'const' for final variables initialized to a constant value - lib\widgets\animated_owl.dart:59:5 - prefer_const_declarations
+   info - Use 'const' for final variables initialized to a constant value - lib\widgets\animated_owl.dart:60:5 - prefer_const_declarations
+   info - Use 'const' for final variables initialized to a constant value - lib\widgets\animated_owl.dart:61:5 - prefer_const_declarations
+   info - Parameter 'key' could be a super parameter - lib\widgets\confetti_overlay.dart:8:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter - lib\widgets\crossword_grid.dart:8:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter - lib\widgets\interactive_wheel.dart:9:9 - use_super_parameters
+   info - The private field _selectedIndices could be 'final' - lib\widgets\interactive_wheel.dart:18:13 - prefer_final_fields
+   info - Parameter 'key' could be a super parameter - lib\widgets\market_modal.dart:8:9 - use_super_parameters
+   info - Parameter 'key' could be a super parameter - lib\widgets\toast_notification.dart:7:9 - use_super_parameters
+
+C:\flutter\bin\flutter.bat : 49 issues fou
+nd. (ran in 7.7s)
+At line:1 char:1
++ C:\flutter\bin\flutter.bat analyze 2>&1 
+| Out-File -FilePath C:\Users ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecifie 
+   d: (49 issues found. (ran in 7.7s):St  
+  ring) [], RemoteException
+    + FullyQualifiedErrorId : NativeComma 
+   ndError
+ 

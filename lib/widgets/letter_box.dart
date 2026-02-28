@@ -5,13 +5,15 @@ class LetterBox extends StatelessWidget {
   final String letter;
   final bool isFound;
   final bool isHinted;
+  final bool isSurpriseTile;
 
   const LetterBox({
-    Key? key,
+    super.key,
     required this.letter,
     this.isFound = false,
     this.isHinted = false,
-  }) : super(key: key);
+    this.isSurpriseTile = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,15 +49,25 @@ class LetterBox extends StatelessWidget {
       child: Transform.scale(
         scale: scale,
         child: Center(
-          child: Text(
-            letter.toUpperCase(),
-            style: TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.w900,
-              color: textColor,
-            ),
-          ),
+          child: _buildContent(textColor),
         ),
+      ),
+    );
+  }
+
+  Widget _buildContent(Color textColor) {
+    if (isSurpriseTile && !isFound && !isHinted) {
+      return const Text(
+        "💎",
+        style: TextStyle(fontSize: 22),
+      );
+    }
+    return Text(
+      letter.toUpperCase(),
+      style: TextStyle(
+        fontSize: 26,
+        fontWeight: FontWeight.w900,
+        color: textColor,
       ),
     );
   }

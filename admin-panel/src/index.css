@@ -1,0 +1,267 @@
+:root {
+  --bg-blue: #3E8AF6;
+  --accent-yellow: #FFD400;
+  --accent-green: #00E676;
+  --accent-red: #FF3D00;
+  --black: #111111;
+  --white: #FFFFFF;
+  --gray: #D1D5DB;
+
+  --border-width: 4px;
+  --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-blue);
+  color: var(--black);
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Layout utilities */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: var(--accent-yellow);
+}
+
+.auth-box {
+  width: 100%;
+  max-width: 400px;
+}
+
+.page-container {
+  padding: 2rem;
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.error-banner {
+  background-color: var(--accent-red);
+  color: var(--white);
+  font-weight: bold;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: var(--border-width) solid var(--black);
+  box-shadow: 4px 4px 0px var(--black);
+}
+
+/* Brutalist Elements */
+.brutalist-card {
+  border: var(--border-width) solid var(--black);
+  padding: 1.5rem;
+  background-color: var(--white);
+  box-shadow: 8px 8px 0px var(--black);
+}
+
+.brutalist-card-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  border-bottom: var(--border-width) solid var(--black);
+  padding-bottom: 0.75rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.brutalist-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1.125rem;
+  font-family: var(--font-inter);
+  font-weight: 700;
+  border: var(--border-width) solid var(--black);
+  background-color: var(--white);
+  border-radius: 0;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.brutalist-input:focus {
+  background-color: #fcfbd3;
+  box-shadow: 4px 4px 0px var(--black);
+  transform: translate(-4px, -4px);
+}
+
+.brutalist-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: var(--border-width) solid var(--black);
+  transition: all 0.1s;
+  font-size: 1.1rem;
+}
+
+.brutalist-button.full-width {
+  width: 100%;
+}
+
+/* Page headings */
+.page-heading {
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-top: 0;
+}
+
+/* Sidebar Layout */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.admin-sidebar {
+  width: 250px;
+  background-color: var(--white);
+  border-right: var(--border-width) solid var(--black);
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-sidebar-header {
+  padding: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  border-bottom: var(--border-width) solid var(--black);
+  background-color: var(--accent-yellow);
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.admin-nav-link {
+  padding: 1rem 1.5rem;
+  font-weight: 900;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  border-bottom: var(--border-width) solid var(--black);
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-nav-link:hover,
+.admin-nav-link.active {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.admin-nav-link.active {
+  background-color: var(--black);
+}
+
+.admin-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: #f4f4f4;
+}
+
+.admin-header {
+  padding: 1rem 2rem;
+  background-color: var(--white);
+  border-bottom: var(--border-width) solid var(--black);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.admin-content {
+  padding: 2rem;
+  flex-grow: 1;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-value {
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 0.5rem 0;
+}
+
+/* Tables */
+.brutalist-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border: var(--border-width) solid var(--black);
+  background-color: var(--white);
+  box-shadow: 8px 8px 0px var(--black);
+  margin-bottom: 2rem;
+}
+
+.brutalist-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.brutalist-table th,
+.brutalist-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 2px solid var(--black);
+  border-right: 2px solid var(--black);
+}
+
+.brutalist-table th:last-child,
+.brutalist-table td:last-child {
+  border-right: none;
+}
+
+.brutalist-table th {
+  background-color: var(--accent-yellow);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  border-bottom: 4px solid var(--black);
+}
+
+.brutalist-table tr:hover {
+  background-color: #fcfbd3;
+}

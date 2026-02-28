@@ -1,0 +1,25 @@
+{
+    "functions": {
+        "source": "functions"
+    },
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "kelimanya-32284",
+                    "appId": "1:439266008298:android:86aa05d0a5cdc79f4acb93",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "kelimanya-32284",
+                    "configurations": {
+                        "android": "1:439266008298:android:86aa05d0a5cdc79f4acb93",
+                        "web": "1:439266008298:web:bf9b777399c5ffd24acb93"
+                    }
+                }
+            }
+        }
+    }
+}

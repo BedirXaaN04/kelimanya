@@ -1,29 +1,39 @@
 {
-    "project_info": {
-        "project_number": "439266008298",
-        "project_id": "kelimanya-32284",
-        "storage_bucket": "kelimanya-32284.firebasestorage.app"
-    },
-    "client": [
-        {
-            "client_info": {
-                "mobilesdk_app_id": "1:439266008298:android:86aa05d0a5cdc79f4acb93",
-                "android_client_info": {
-                    "package_name": "com.kelimanya"
-                }
-            },
-            "oauth_client": [],
-            "api_key": [
-                {
-                    "current_key": "AIzaSyB0GhpskhqFvfTBF0jDY_0iBx9EcF1yEXI"
-                }
-            ],
-            "services": {
-                "appinvite_service": {
-                    "other_platform_oauth_client": []
-                }
-            }
+  "project_info": {
+    "project_number": "439266008298",
+    "project_id": "kelimanya-32284",
+    "storage_bucket": "kelimanya-32284.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439266008298:android:86aa05d0a5cdc79f4acb93",
+        "android_client_info": {
+          "package_name": "com.kelimanya"
         }
-    ],
-    "configuration_version": "1"
+      },
+      "oauth_client": [
+        {
+          "client_id": "439266008298-8uu7umb7o0hvt6dvsemul0tcmhrtupc0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0GhpskhqFvfTBF0jDY_0iBx9EcF1yEXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "439266008298-8uu7umb7o0hvt6dvsemul0tcmhrtupc0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
 }

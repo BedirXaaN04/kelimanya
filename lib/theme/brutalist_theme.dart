@@ -6,11 +6,14 @@ class BrutalistTheme {
   static const Color accentYellow = Color(0xFFfcd53f);
   static const Color accentRed = Color(0xFFff4757);
   static const Color accentGreen = Color(0xFF2ed573);
+  static const Color accentPurple = Color(0xFF8c7ae6);
+  static const Color nightBg = Color(0xFF1e272e);
+  static const Color grey = Color(0xFFdfe4ea);
   static const Color white = Color(0xFFffffff);
   static const Color black = Color(0xFF000000);
 
   static const double borderWidth = 4.0;
-  static const double shadowOffset = 6.0;
+  static const double shadowOffset = 4.0;
 
   static ThemeData get theme {
     return ThemeData(

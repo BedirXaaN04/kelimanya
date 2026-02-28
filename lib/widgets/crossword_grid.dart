@@ -35,12 +35,18 @@ class CrosswordGrid extends StatelessWidget {
             'x': x,
             'y': y,
             'isFound': false, // will update if any of its word is found
+            'isHinted': false,
           };
         }
         
         // If at least one word occupying this cell is found, cell is revealed
         if (wordFound) {
           cells[key]!['isFound'] = true;
+        }
+
+        // Apply hint logic
+        if (provider.hintedCoordinates.contains(key)) {
+            cells[key]!['isHinted'] = true;
         }
 
         maxX = max(maxX, x);
@@ -58,27 +64,39 @@ class CrosswordGrid extends StatelessWidget {
     double gridWidth = (maxX + 1) * cellSize;
     double gridHeight = (maxY + 1) * cellSize;
 
-    return Center(
-      child: InteractiveViewer(
-        boundaryMargin: const EdgeInsets.all(20.0),
-        minScale: 0.5,
-        maxScale: 2.0,
-        child: SizedBox(
-          width: gridWidth,
-          height: gridHeight,
-          child: Stack(
-            children: cells.values.map((cell) {
-              int cx = cell['x'];
-              int cy = cell['y'];
-              return Positioned(
-                left: cx * cellSize,
-                top: cy * cellSize,
-                child: LetterBox(
-                  letter: cell['letter'],
-                  isFound: cell['isFound'],
+    return Expanded(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: InteractiveViewer(
+            panEnabled: true,
+            boundaryMargin: const EdgeInsets.all(40),
+            minScale: 0.1,
+            maxScale: 2.0,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: SizedBox(
+                width: gridWidth,
+                height: gridHeight,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: cells.values.map((cell) {
+                    int cx = cell['x'];
+                    int cy = cell['y'];
+                    return Positioned(
+                      left: cx * cellSize,
+                      top: cy * cellSize,
+                      child: LetterBox(
+                        letter: cell['letter'],
+                        isFound: cell['isFound'],
+                        isHinted: cell['isHinted'] ?? false,
+                        isSurpriseTile: provider.surpriseTileCoordinate == "${cx}_${cy}" && !provider.isSurpriseFound,
+                      ),
+                    );
+                  }).toList(),
                 ),
-              );
-            }).toList(),
+              ),
+            ),
           ),
         ),
       ),

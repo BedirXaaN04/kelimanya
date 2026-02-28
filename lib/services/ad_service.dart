@@ -13,17 +13,24 @@ class AdService {
   InterstitialAd? _interstitialAd;
   RewardedAd? _rewardedAd;
 
-  // Real Add IDs based on requirements
-  final String _interstitialAdUnitId = 'ca-app-pub-6698554585648483/3166500913';
-  final String _rewardedAdUnitId = 'ca-app-pub-6698554585648483/6359640464';
+  // Debug: Use test ad IDs to avoid policy violations
+  // Release: Use real ad IDs
+  final String _interstitialAdUnitId = kDebugMode
+      ? 'ca-app-pub-3940256099942544/1033173712'  // Google test interstitial
+      : 'ca-app-pub-6698554585648483/3166500913';
+  final String _rewardedAdUnitId = kDebugMode
+      ? 'ca-app-pub-3940256099942544/5224354917'  // Google test rewarded
+      : 'ca-app-pub-6698554585648483/6359640464';
 
   Future<void> initialize() async {
+    if (kIsWeb) return; // Ads not supported on web
     await MobileAds.instance.initialize();
     loadInterstitialAd();
     loadRewardedAd();
   }
 
   void loadInterstitialAd() {
+    if (kIsWeb) return;
     InterstitialAd.load(
       adUnitId: _interstitialAdUnitId,
       request: const AdRequest(),
@@ -51,6 +58,12 @@ class AdService {
   }
 
   void showInterstitialAd({VoidCallback? onAdDismissed}) {
+    if (kIsWeb) {
+      debugPrint("Web Mock: Interstitial ad skipped.");
+      if (onAdDismissed != null) onAdDismissed();
+      return;
+    }
+
     if (_interstitialAd == null) {
       debugPrint('Warning: attempt to show interstitial before loaded.');
       if (onAdDismissed != null) onAdDismissed();
@@ -75,6 +88,7 @@ class AdService {
   }
 
   void loadRewardedAd() {
+    if (kIsWeb) return;
     RewardedAd.load(
       adUnitId: _rewardedAdUnitId,
       request: const AdRequest(),
@@ -92,6 +106,12 @@ class AdService {
   }
 
   void showRewardedAd({required VoidCallback onRewardEarned, VoidCallback? onAdFailed}) {
+    if (kIsWeb) {
+      debugPrint("Web Mock: Rewarding user instantly without ad.");
+      onRewardEarned();
+      return;
+    }
+
     if (_rewardedAd == null) {
       debugPrint('Warning: attempt to show rewarded before loaded.');
       if (onAdFailed != null) onAdFailed();

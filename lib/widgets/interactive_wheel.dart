@@ -40,7 +40,8 @@ class _InteractiveWheelState extends State<InteractiveWheel> {
     final RenderBox renderBox = _wheelKey.currentContext!.findRenderObject() as RenderBox;
     final size = renderBox.size;
     final center = Offset(size.width / 2, size.height / 2);
-    final radius = size.width / 2 - 40; // 40 is button radius approx
+    final minDimension = min(size.width, size.height);
+    final radius = minDimension / 2 - 35; // 35 is button radius approx
     
     List<Offset> positions = [];
     double step = (2 * pi) / widget.letters.length;
@@ -108,7 +109,6 @@ class _InteractiveWheelState extends State<InteractiveWheel> {
     String previewWord = _selectedIndices.map((i) => widget.letters[i]).join();
 
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
         AnimatedOpacity(
           opacity: _showPreview ? 1.0 : 0.0,
@@ -122,18 +122,22 @@ class _InteractiveWheelState extends State<InteractiveWheel> {
           ),
         ),
         const SizedBox(height: 10),
-        SizedBox(
-          width: 330,
-          height: 330,
-          child: Stack(
-            key: _wheelKey,
-            clipBehavior: Clip.none,
-            alignment: Alignment.center,
-            children: [
-              // Background circle
-              Container(
-                width: 240,
-                height: 240,
+        Expanded(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final dimension = min(constraints.maxWidth, constraints.maxHeight);
+              return SizedBox(
+                width: dimension,
+                height: dimension,
+                child: Stack(
+                  key: _wheelKey,
+                  clipBehavior: Clip.none,
+                  alignment: Alignment.center,
+                  children: [
+                    // Background circle
+                    Container(
+                      width: dimension * 0.72,
+                      height: dimension * 0.72,
                 decoration: BoxDecoration(
                   color: BrutalistTheme.white,
                   shape: BoxShape.circle,
@@ -144,11 +148,11 @@ class _InteractiveWheelState extends State<InteractiveWheel> {
                 ),
               ),
               
-              // Custom Painter for lines
-              RepaintBoundary(
-                child: CustomPaint(
-                  size: const Size(330, 330),
-                  painter: LinePainter(
+                    // Custom Painter for lines
+                    RepaintBoundary(
+                      child: CustomPaint(
+                        size: Size(dimension, dimension),
+                        painter: LinePainter(
                     letterPositions: _letterPositions,
                     selectedIndices: _selectedIndices,
                     currentDragPos: _currentDragPos,
@@ -201,9 +205,12 @@ class _InteractiveWheelState extends State<InteractiveWheel> {
               }),
             ],
           ),
-        ),
-      ],
-    );
+        );
+      },
+    ),
+  ),
+],
+);
   }
 }
 

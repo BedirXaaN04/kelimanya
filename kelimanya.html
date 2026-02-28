@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Kelimanya 🦉</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;800;900&display=swap');
+:root{--y:#fcd53f;--r:#ff4757;--g:#2ed573;--p:#8c7ae6;--n:#1e272e;--w:#fff;--b:#000;--gr:#dfe4ea;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;outline:none;}
+body{font-family:'Poppins',sans-serif;background:var(--n);background-image:radial-gradient(var(--y) 1.5px,transparent 1.5px);background-size:30px 30px;width:100vw;height:100vh;overflow:hidden;user-select:none;}
+.screen{display:none;position:absolute;inset:0;flex-direction:column;align-items:center;overflow:hidden;}
+.screen.active{display:flex;}
+.bx{background:var(--w);border:4px solid var(--b);box-shadow:6px 6px 0 var(--b);border-radius:12px;font-family:'Poppins',sans-serif;font-weight:900;color:var(--b);}
+.btn{cursor:pointer;display:flex;align-items:center;justify-content:center;text-transform:uppercase;transition:transform .1s,box-shadow .1s;}
+.btn:active{transform:translate(6px,6px)!important;box-shadow:0 0 0 var(--b)!important;}
+input.fi{width:100%;padding:13px;font-size:15px;font-family:'Poppins',sans-serif;font-weight:600;background:#f1f2f6;border:3px solid var(--b);border-radius:8px;margin-bottom:11px;display:block;transition:all .2s;}
+input.fi:focus{background:var(--w);transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--b);}
+#toast{position:fixed;top:68px;left:50%;transform:translateX(-50%);background:var(--p);color:#fff;font-weight:900;padding:9px 22px;border-radius:26px;border:3px solid var(--b);box-shadow:4px 4px 0 var(--b);font-size:15px;z-index:9000;opacity:0;pointer-events:none;transition:opacity .3s;white-space:nowrap;}
+#toast.show{opacity:1;}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.shake{animation:shake .35s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes confFall{0%{transform:translateY(-10px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+.confetti-p{position:fixed;width:11px;height:11px;pointer-events:none;z-index:9999;border-radius:2px;animation:confFall linear forwards;}
+
+/* LOGIN */
+#login-screen{justify-content:center;align-items:center;padding:16px;}
+#lbox{width:100%;max-width:370px;padding:24px 20px;display:flex;flex-direction:column;align-items:center;}
+#lbox h1{font-size:28px;margin-bottom:12px;}
+.tabs{display:flex;width:100%;gap:10px;margin-bottom:16px;}
+.tab{flex:1;padding:9px;font-weight:900;font-size:14px;border:3px solid var(--b);border-radius:8px;background:var(--gr);cursor:pointer;box-shadow:3px 3px 0 var(--b);font-family:'Poppins',sans-serif;transition:all .15s;}
+.tab.on{background:var(--y);transform:translate(3px,3px);box-shadow:0 0 0 var(--b);}
+.pane{width:100%;display:none;}
+.pane.on{display:block;animation:fadeUp .25s ease;}
+#lmsg{margin-top:10px;font-weight:800;font-size:13px;text-align:center;min-height:18px;}
+.gbtn{margin-top:12px;width:100%;padding:11px;font-size:14px;background:var(--n);color:var(--w);border:3px solid var(--b);border-radius:8px;box-shadow:4px 4px 0 var(--b);font-family:'Poppins',sans-serif;font-weight:900;cursor:pointer;transition:all .1s;text-transform:uppercase;}
+.gbtn:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--b);}
+
+/* HOME */
+#home-screen{justify-content:center;align-items:center;gap:18px;padding:20px;}
+.htop{position:absolute;top:20px;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center;}
+.hside{position:absolute;left:20px;top:86px;display:flex;flex-direction:column;gap:12px;}
+#streakBadge{position:absolute;top:20px;left:50%;transform:translateX(-50%);padding:5px 14px;background:var(--r);color:#fff;font-size:12px;border-radius:30px;font-weight:900;border:3px solid var(--b);box-shadow:3px 3px 0 var(--b);}
+
+/* GAME */
+#game-screen{padding:10px;justify-content:flex-start;gap:0;}
+.ghdr{width:100%;display:flex;justify-content:space-between;align-items:center;padding:8px 13px;margin-bottom:4px;flex-shrink:0;}
+.gbody{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:space-between;width:100%;min-height:0;position:relative;padding-bottom:4px;}
+.owlmon{width:74px;height:58px;flex-shrink:0;}
+
+/* Progress */
+#progWrap{background:var(--w);border:3px solid var(--b);padding:5px 14px;border-radius:50px;box-shadow:4px 4px 0 var(--b);font-weight:900;font-size:14px;white-space:nowrap;}
+
+/* Board */
+.boardwrap{flex:1;display:flex;align-items:center;justify-content:center;width:100%;min-height:0;}
+.gwrap{position:relative;}
+.cell{position:absolute;width:42px;height:42px;background:var(--w);border:3px solid var(--b);box-shadow:3px 3px 0 var(--b);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:transparent;transition:all .3s cubic-bezier(.175,.885,.32,1.275);text-transform:uppercase;}
+.cell.found{background:var(--y);color:var(--b);transform:scale(1.07);}
+.cell.hinted{color:rgba(0,0,0,.35);border-style:dashed;}
+
+/* Hints */
+.hints{position:absolute;right:6px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px;z-index:10;}
+.hbtn{width:46px;height:46px;font-size:17px;position:relative;}
+.hcost{position:absolute;bottom:-5px;right:-5px;background:var(--r);color:#fff;font-size:9px;padding:2px 4px;border-radius:8px;border:2px solid var(--b);font-weight:900;}
+
+/* Wheel */
+.wwrap{position:relative;width:265px;height:265px;flex-shrink:0;touch-action:none;}
+.wbg{position:absolute;top:13px;left:13px;width:239px;height:239px;background:var(--w);border:4px solid var(--b);box-shadow:6px 6px 0 var(--b);border-radius:50%;}
+#canvas{position:absolute;inset:0;width:265px;height:265px;z-index:2;touch-action:none;}
+.lbtn{position:absolute;width:54px;height:54px;background:var(--y);border:4px solid var(--b);box-shadow:4px 4px 0 var(--b);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:900;z-index:3;pointer-events:none;transition:transform .1s,background .1s,box-shadow .1s;}
+.lbtn.sel{background:#fff8cc;transform:scale(.87);box-shadow:0 0 0 var(--b);}
+#prevWord{position:absolute;top:-46px;left:50%;transform:translateX(-50%);padding:5px 18px;font-size:19px;letter-spacing:3px;z-index:5;background:var(--w);border:3px solid var(--b);box-shadow:4px 4px 0 var(--b);border-radius:8px;white-space:nowrap;opacity:0;transition:opacity .15s;font-weight:900;}
+#undoBtn{position:absolute;bottom:-62px;left:50%;transform:translateX(-50%);padding:9px 20px;font-size:16px;background:var(--y);white-space:nowrap;}
+
+/* Modals */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;}
+.modal.on{display:flex;}
+.mbox{width:100%;max-width:330px;padding:26px;position:relative;}
+.mclose{position:absolute;top:-13px;right:-13px;width:40px;height:40px;background:var(--r);color:#fff;border-radius:50%;font-size:17px;font-weight:900;border:3px solid var(--b);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.trow{display:flex;align-items:center;gap:10px;padding:9px;border-bottom:2px solid #eee;}
+.pbwrap{flex:1;background:#ddd;border-radius:5px;height:11px;border:2px solid var(--b);overflow:hidden;margin-top:4px;}
+.pb{height:100%;background:var(--g);transition:width .5s;}
+.winbox{background:var(--g);color:#fff;text-align:center;border-width:6px;}
+</style>
+</head>
+<body>
+<div id="toast"></div>
+<div id="app">
+
+<!-- LOGIN -->
+<div id="login-screen" class="screen active">
+  <div class="bx" id="lbox">
+    <h1>KELİMANYA 🦉</h1>
+    <div class="tabs">
+      <button class="tab on" id="tabA" onclick="switchTab('login')">Giriş Yap</button>
+      <button class="tab"    id="tabB" onclick="switchTab('signup')">Kayıt Ol</button>
+    </div>
+    <div style="width:115px;height:85px;margin-bottom:10px;">
+      <svg id="loginOwl" viewBox="0 0 200 150" style="width:100%;height:100%;overflow:visible;">
+        <path d="M40 150 C40 30 160 30 160 150" fill="var(--p)" stroke="#000" stroke-width="6"/>
+        <path d="M60 150 C60 80 140 80 140 150" fill="rgba(255,255,255,.3)" stroke="#000" stroke-width="4"/>
+        <circle id="lo-eL" cx="75"  cy="75" r="22" fill="#fff" stroke="#000" stroke-width="5"/>
+        <circle id="lo-eR" cx="125" cy="75" r="22" fill="#fff" stroke="#000" stroke-width="5"/>
+        <path id="lo-hL" d="M55 75 Q75 55 95 75"   stroke="#000" stroke-width="6" stroke-linecap="round" fill="none" opacity="0"/>
+        <path id="lo-hR" d="M105 75 Q125 55 145 75" stroke="#000" stroke-width="6" stroke-linecap="round" fill="none" opacity="0"/>
+        <path id="lo-bL" d="M48 55 L88 68"  stroke="#000" stroke-width="6" stroke-linecap="round" opacity="0"/>
+        <path id="lo-bR" d="M152 55 L112 68" stroke="#000" stroke-width="6" stroke-linecap="round" opacity="0"/>
+        <circle id="lo-pL" cx="75"  cy="75" r="8" fill="#000"/>
+        <circle id="lo-pR" cx="125" cy="75" r="8" fill="#000"/>
+        <polygon points="100,85 90,105 110,105" fill="var(--y)" stroke="#000" stroke-width="4"/>
+        <ellipse id="lo-wL" cx="30"  cy="110" rx="18" ry="40" fill="var(--p)" stroke="#000" stroke-width="5" style="transform-origin:30px 110px;transition:transform .4s cubic-bezier(.175,.885,.32,1.275)"/>
+        <ellipse id="lo-wR" cx="170" cy="110" rx="18" ry="40" fill="var(--p)" stroke="#000" stroke-width="5" style="transform-origin:170px 110px;transition:transform .4s cubic-bezier(.175,.885,.32,1.275)"/>
+      </svg>
+    </div>
+    <div class="pane on" id="paneLogin">
+      <input class="fi watch-i" id="li-user" type="text" placeholder="Kullanıcı Adı" autocomplete="off">
+      <input class="fi hide-i"  id="li-pass" type="password" placeholder="Şifre">
+      <button class="bx btn" onclick="doLogin()" style="width:100%;padding:13px;font-size:16px;background:var(--y);">Giriş Yap</button>
+    </div>
+    <div class="pane" id="paneSignup">
+      <input class="fi watch-i" type="text"     placeholder="Kullanıcı Adı Seç" autocomplete="off">
+      <input class="fi watch-i" type="email"    placeholder="E-Posta" autocomplete="off">
+      <input class="fi hide-i"  type="password" placeholder="Şifre Belirle">
+      <button class="bx btn" onclick="doSignup()" style="width:100%;padding:13px;font-size:16px;background:var(--g);color:#fff;">Kayıt Ol</button>
+    </div>
+    <div id="lmsg"></div>
+    <button class="gbtn" onclick="guestLogin()">👤 Misafir Olarak Oyna</button>
+    <div style="margin-top:8px;font-size:11px;color:#888;font-weight:600;">Test hesabı: <b>deneme</b> / <b>1234</b></div>
+  </div>
+</div>
+
+<!-- HOME -->
+<div id="home-screen" class="screen">
+  <div class="htop">
+    <div class="bx btn" style="padding:8px 15px;background:var(--y);font-size:17px;"><span id="homeCoin">200</span> 🪙</div>
+    <div class="bx btn" style="width:44px;height:44px;font-size:18px;" onclick="openM('settingsM')">⚙️</div>
+  </div>
+  <div class="hside">
+    <div class="bx btn" style="width:48px;height:48px;font-size:21px;" onclick="openM('tasksM')">📋</div>
+    <div class="bx btn" style="width:48px;height:48px;font-size:21px;" onclick="claimReward(50)">🎁</div>
+  </div>
+  <div id="streakBadge">🔥 <span id="streakNum">0</span> Seri</div>
+  <div class="bx" style="font-size:30px;padding:16px 36px;text-align:center;margin-top:80px;">SEVİYE <span id="homeLevel">1</span></div>
+  <div style="display:flex;flex-direction:column;gap:15px;width:100%;max-width:248px;margin-top:18px;">
+    <div class="bx btn" style="padding:20px;font-size:28px;background:var(--y);" onclick="showScreen('game')">OYNA ▶</div>
+    <div class="bx btn" style="padding:11px;font-size:16px;" onclick="openM('storeM')">🛒 MARKET</div>
+  </div>
+  <div style="position:absolute;bottom:14px;font-size:12px;color:rgba(255,255,255,.4);font-weight:600;" id="userDisp"></div>
+</div>
+
+<!-- GAME -->
+<div id="game-screen" class="screen">
+  <div class="ghdr bx">
+    <button class="bx btn" style="padding:7px 12px;font-size:15px;" onclick="showScreen('home')">🏠</button>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+      <div style="font-weight:900;font-size:16px;">BÖLÜM <span id="gameLvl">1</span></div>
+      <div id="progWrap">BULUNAN <span id="progTxt">0/0</span></div>
+    </div>
+    <div class="bx" style="padding:7px 12px;background:var(--y);font-size:13px;font-weight:900;"><span id="gameCoin">200</span> 🪙</div>
+  </div>
+  <div class="gbody">
+    <!-- Baykuş -->
+    <div class="owlmon">
+      <svg id="gameOwl" viewBox="0 0 200 150" style="width:100%;height:100%;overflow:visible;">
+        <path d="M40 150 C40 30 160 30 160 150" fill="var(--p)" stroke="#000" stroke-width="6"/>
+        <path d="M60 150 C60 80 140 80 140 150" fill="rgba(255,255,255,.3)" stroke="#000" stroke-width="4"/>
+        <circle id="go-eL" cx="75"  cy="75" r="22" fill="#fff" stroke="#000" stroke-width="5"/>
+        <circle id="go-eR" cx="125" cy="75" r="22" fill="#fff" stroke="#000" stroke-width="5"/>
+        <path id="go-hL" d="M55 75 Q75 55 95 75"   stroke="#000" stroke-width="6" stroke-linecap="round" fill="none" opacity="0"/>
+        <path id="go-hR" d="M105 75 Q125 55 145 75" stroke="#000" stroke-width="6" stroke-linecap="round" fill="none" opacity="0"/>
+        <path id="go-bL" d="M48 55 L88 68"  stroke="#000" stroke-width="6" stroke-linecap="round" opacity="0"/>
+        <path id="go-bR" d="M152 55 L112 68" stroke="#000" stroke-width="6" stroke-linecap="round" opacity="0"/>
+        <circle id="go-pL" cx="75"  cy="75" r="8" fill="#000"/>
+        <circle id="go-pR" cx="125" cy="75" r="8" fill="#000"/>
+        <polygon points="100,85 90,105 110,105" fill="var(--y)" stroke="#000" stroke-width="4"/>
+        <ellipse id="go-wL" cx="30"  cy="110" rx="18" ry="40" fill="var(--p)" stroke="#000" stroke-width="5" style="transform-origin:30px 110px;transition:transform .4s cubic-bezier(.175,.885,.32,1.275)"/>
+        <ellipse id="go-wR" cx="170" cy="110" rx="18" ry="40" fill="var(--p)" stroke="#000" stroke-width="5" style="transform-origin:170px 110px;transition:transform .4s cubic-bezier(.175,.885,.32,1.275)"/>
+      </svg>
+    </div>
+    <!-- Grid -->
+    <div class="boardwrap"><div class="gwrap" id="gridWrap"></div></div>
+    <!-- Joker -->
+    <div class="hints">
+      <button class="bx btn hbtn" onclick="useHint('rocket')">🚀<span class="hcost">100</span></button>
+      <button class="bx btn hbtn" onclick="useHint('single')">💡<span class="hcost">25</span></button>
+      <button class="bx btn hbtn" onclick="shuffleW()">🔀</button>
+    </div>
+    <!-- Wheel -->
+    <div class="wwrap" id="wheelArea">
+      <div class="bx" id="prevWord"></div>
+      <div class="wbg"></div>
+      <canvas id="canvas" width="265" height="265"></canvas>
+      <button id="undoBtn" class="bx btn" onclick="undoLetter()">↩ GERİ AL</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- #app -->
+
+<!-- MODALS -->
+<div id="tasksM" class="modal"><div class="bx mbox" style="background:#fff;">
+  <div class="mclose" onclick="closeM('tasksM')">✕</div>
+  <h2 style="text-align:center;margin-bottom:15px;font-size:22px;">GÖREVLER</h2>
+  <div class="trow"><div style="flex:1;"><p style="font-weight:900;font-size:13px;">10 Ekstra Kelime Bul</p><div class="pbwrap"><div class="pb" style="width:100%"></div></div></div>
+  <button class="bx btn" style="padding:7px 12px;font-size:12px;background:var(--y);flex-shrink:0;" onclick="claimReward(50);closeM('tasksM')">+50🪙</button></div>
+  <div class="trow"><div style="flex:1;"><p style="font-weight:900;font-size:13px;">5 Bölüm Geç</p><div class="pbwrap"><div class="pb" style="width:40%"></div></div></div>
+  <button class="bx btn" style="padding:7px 12px;font-size:12px;background:#ccc;cursor:not-allowed;flex-shrink:0;">2/5</button></div>
+</div></div>
+
+<div id="storeM" class="modal"><div class="bx mbox" style="background:#fff;">
+  <div class="mclose" onclick="closeM('storeM')">✕</div>
+  <h2 style="text-align:center;margin-bottom:15px;font-size:22px;">MARKET</h2>
+  <button class="bx btn" style="padding:13px;justify-content:space-between;width:100%;margin-bottom:10px;background:var(--n);color:#fff;" onclick="buyCoins(500)">
+    <span>🪙 500 ALTIN</span><span style="background:var(--r);padding:3px 8px;border:2px solid #000;border-radius:6px;">₺59,99</span></button>
+  <button class="bx btn" style="padding:13px;justify-content:space-between;width:100%;background:var(--y);" onclick="buyCoins(2000)">
+    <span>🪙 2000 ALTIN</span><span style="background:var(--r);color:#fff;padding:3px 8px;border:2px solid #000;border-radius:6px;">₺199,99</span></button>
+</div></div>
+
+<div id="settingsM" class="modal"><div class="bx mbox" style="background:#fff;">
+  <div class="mclose" onclick="closeM('settingsM')">✕</div>
+  <h2 style="text-align:center;margin-bottom:15px;font-size:22px;">AYARLAR</h2>
+  <button class="bx btn" style="padding:13px;width:100%;margin-bottom:10px;" onclick="toggleSound()">🔊 SES: <span id="sndTxt">AÇIK</span></button>
+  <button class="bx btn" style="padding:13px;width:100%;background:var(--r);color:#fff;" onclick="doLogout()">Sıfırla & Çıkış</button>
+</div></div>
+
+<div id="winM" class="modal"><div class="bx mbox winbox" style="background:var(--g);text-align:center;border-width:6px;">
+  <h1 style="font-size:42px;text-shadow:3px 3px 0 #000;margin-bottom:8px;">HARİKA! 🎉</h1>
+  <p style="font-weight:900;color:#000;font-size:16px;">Bölümü Tamamladın!</p>
+  <div class="bx" style="color:#000;font-size:26px;padding:13px;margin:15px 0;background:#fff;">🪙 +50</div>
+  <button class="bx btn" onclick="nextLevel()" style="padding:13px;width:100%;background:#fff;font-size:18px;color:#000;">DEVAM ET →</button>
+</div></div>
+
+<script>
+/* =============================================================
+   LEVELS - 50 SEVIYE
+============================================================= */
+const LEVELS = [
+  {id:1,  letters:["A","K","Ş"],   words:[{w:"AŞK",x:0,y:0,d:"H"},{w:"KAŞ",x:2,y:0,d:"V"}], extras:["AK","AŞ"]},
+  {id:2,  letters:["T","O","P"],   words:[{w:"TOP",x:0,y:0,d:"H"},{w:"POT",x:2,y:0,d:"V"}], extras:["OT"]},
+  {id:3,  letters:["K","A","L","E"],words:[{w:"KALE",x:0,y:0,d:"H"},{w:"KEL",x:0,y:0,d:"V"},{w:"ALE",x:1,y:0,d:"V"}],extras:["EL","AL","AK"]},
+  {id:4,  letters:["K","İ","T","A","P"],words:[{w:"KİTAP",x:0,y:0,d:"H"},{w:"KAP",x:0,y:0,d:"V"}],extras:["KAT","AT","PAK","TİP","AİT"]},
+  {id:5,  letters:["S","O","R","U"],words:[{w:"SORU",x:0,y:0,d:"H"},{w:"SOR",x:0,y:0,d:"V"},{w:"RUS",x:2,y:0,d:"V"}],extras:["OR","SO"]},
+  {id:6,  letters:["M","A","S","A"],words:[{w:"MASA",x:0,y:0,d:"H"},{w:"ASMA",x:1,y:0,d:"V"}],extras:["AS","MA","AMA"]},
+  {id:7,  letters:["B","A","R","I","Ş"],words:[{w:"BARIŞ",x:0,y:0,d:"H"},{w:"BAR",x:0,y:0,d:"V"}],extras:["AR","AŞ","ARI"]},
+  {id:8,  letters:["E","L","M","A"],words:[{w:"ELMA",x:0,y:0,d:"H"},{w:"AMEL",x:3,y:0,d:"V"}],extras:["EL","AL","ME","MAL"]},
+  {id:9,  letters:["G","Ü","N","E","Ş"],words:[{w:"GÜNEŞ",x:0,y:0,d:"H"},{w:"GÜN",x:0,y:0,d:"V"},{w:"ŞEN",x:4,y:0,d:"V"}],extras:["ÜN","NE","EŞ"]},
+  {id:10, letters:["K","O","Y","U","N"],words:[{w:"KOYUN",x:0,y:0,d:"H"},{w:"KON",x:0,y:0,d:"V"}],extras:["KOY","ON","OY","UN"]},
+  {id:11, letters:["K","O","L","A"],words:[{w:"KOLA",x:0,y:0,d:"H"},{w:"KOL",x:0,y:0,d:"V"}],extras:["LAK","OL"]},
+  {id:12, letters:["S","I","R","A"],words:[{w:"SIRA",x:0,y:0,d:"H"},{w:"SIR",x:0,y:0,d:"V"}],extras:["ASI","AR"]},
+  {id:13, letters:["K","E","D","İ"],words:[{w:"KEDİ",x:0,y:0,d:"H"},{w:"DİK",x:2,y:0,d:"V"}],extras:["DE","EK","Kİ"]},
+  {id:14, letters:["K","A","P","I"],words:[{w:"KAPI",x:0,y:0,d:"H"},{w:"KAP",x:0,y:0,d:"V"}],extras:["AK","PA"]},
+  {id:15, letters:["P","A","R","A"],words:[{w:"PARA",x:0,y:0,d:"H"},{w:"ARAP",x:1,y:0,d:"V"}],extras:["RAP","AR"]},
+  {id:16, letters:["D","E","R","S"],words:[{w:"DERS",x:0,y:0,d:"H"},{w:"SER",x:3,y:0,d:"V"}],extras:["ER","SE"]},
+  {id:17, letters:["O","Y","U","N"],words:[{w:"OYUN",x:0,y:0,d:"H"},{w:"YUN",x:1,y:0,d:"V"}],extras:["OY","UN"]},
+  {id:18, letters:["İ","M","Z","A"],words:[{w:"İMZA",x:0,y:0,d:"H"},{w:"ZAM",x:2,y:0,d:"V"}],extras:["AZ","İZ","AM"]},
+  {id:19, letters:["K","A","R","I"],words:[{w:"KARI",x:0,y:0,d:"H"},{w:"ARI",x:1,y:0,d:"V"}],extras:["KAR","RAK"]},
+  {id:20, letters:["S","O","R","G","U"],words:[{w:"SORGU",x:0,y:0,d:"H"},{w:"SOR",x:0,y:0,d:"V"}],extras:["SO","OR"]},
+  {id:21, letters:["B","İ","L","G","İ"],words:[{w:"BİLGİ",x:0,y:0,d:"H"},{w:"BİL",x:0,y:0,d:"V"}],extras:["İL","LİG"]},
+  {id:22, letters:["Y","A","Z","I"],words:[{w:"YAZI",x:0,y:0,d:"H"},{w:"YAZ",x:0,y:0,d:"V"}],extras:["AZ","AY"]},
+  {id:23, letters:["K","A","Y","I","K"],words:[{w:"KAYIK",x:0,y:0,d:"H"},{w:"KAY",x:0,y:0,d:"V"}],extras:["AYI","YIK","YAK"]},
+  {id:24, letters:["S","A","N","A","T"],words:[{w:"SANAT",x:0,y:0,d:"H"},{w:"SANA",x:0,y:0,d:"V"}],extras:["SAN","NAT","ATA"]},
+  {id:25, letters:["Z","E","K","A"],words:[{w:"ZEKA",x:0,y:0,d:"H"},{w:"KEZA",x:2,y:0,d:"V"}],extras:["KAZ","EZ"]},
+  {id:26, letters:["A","Y","N","A"],words:[{w:"AYNA",x:0,y:0,d:"H"},{w:"YAN",x:1,y:0,d:"V"}],extras:["AY","AN"]},
+  {id:27, letters:["Ç","İ","Ç","E","K"],words:[{w:"ÇİÇEK",x:0,y:0,d:"H"},{w:"ÇEK",x:2,y:0,d:"V"}],extras:["İÇ","EK"]},
+  {id:28, letters:["B","Ö","C","E","K"],words:[{w:"BÖCEK",x:0,y:0,d:"H"},{w:"CEK",x:2,y:0,d:"V"}],extras:["EK","BEK"]},
+  {id:29, letters:["H","A","V","A"],words:[{w:"HAVA",x:0,y:0,d:"H"},{w:"VAHA",x:2,y:0,d:"V"}],extras:["AV","HA","AH"]},
+  {id:30, letters:["G","E","M","İ"],words:[{w:"GEMİ",x:0,y:0,d:"H"},{w:"GEM",x:0,y:0,d:"V"}],extras:["Mİ","ME"]},
+  {id:31, letters:["U","Ç","A","K"],words:[{w:"UÇAK",x:0,y:0,d:"H"},{w:"UÇ",x:0,y:0,d:"V"}],extras:["AÇ","AK","KAÇ"]},
+  {id:32, letters:["O","R","M","A","N"],words:[{w:"ORMAN",x:0,y:0,d:"H"},{w:"MOR",x:2,y:0,d:"V"}],extras:["ON","NAM"]},
+  {id:33, letters:["K","Ö","P","E","K"],words:[{w:"KÖPEK",x:0,y:0,d:"H"},{w:"PEK",x:2,y:0,d:"V"}],extras:["EK","KEP"]},
+  {id:34, letters:["A","R","S","L","A","N"],words:[{w:"ARSLAN",x:0,y:0,d:"H"},{w:"NAR",x:5,y:0,d:"V"}],extras:["AR","LAN","SAL"]},
+  {id:35, letters:["T","A","V","U","K"],words:[{w:"TAVUK",x:0,y:0,d:"H"},{w:"TAV",x:0,y:0,d:"V"}],extras:["KUT","AK","AT"]},
+  {id:36, letters:["M","E","Y","V","E"],words:[{w:"MEYVE",x:0,y:0,d:"H"},{w:"MEY",x:0,y:0,d:"V"}],extras:["EV","ME","YEM"]},
+  {id:37, letters:["B","A","L","I","K"],words:[{w:"BALIK",x:0,y:0,d:"H"},{w:"BAL",x:0,y:0,d:"V"}],extras:["AL","KIL","BAK"]},
+  {id:38, letters:["K","U","Z","U"],words:[{w:"KUZU",x:0,y:0,d:"H"},{w:"KUZ",x:0,y:0,d:"V"}],extras:["UZ"]},
+  {id:39, letters:["A","T","E","Ş"],words:[{w:"ATEŞ",x:0,y:0,d:"H"},{w:"AT",x:0,y:0,d:"V"}],extras:["EŞ","TAŞ","AŞ"]},
+  {id:40, letters:["S","U","Y","U"],words:[{w:"SUYU",x:0,y:0,d:"H"},{w:"SUY",x:0,y:0,d:"V"}],extras:["SU","UY"]},
+  {id:41, letters:["R","E","N","K"],words:[{w:"RENK",x:0,y:0,d:"H"},{w:"KEN",x:3,y:0,d:"V"}],extras:["EN","NE","ERK"]},
+  {id:42, letters:["D","O","Ğ","A"],words:[{w:"DOĞA",x:0,y:0,d:"H"},{w:"DAĞ",x:0,y:0,d:"V"}],extras:["AĞ","OD"]},
+  {id:43, letters:["D","E","N","İ","Z"],words:[{w:"DENİZ",x:0,y:0,d:"H"},{w:"DİN",x:0,y:0,d:"V"}],extras:["EN","NE","İZ","DİZ"]},
+  {id:44, letters:["Ş","E","H","İ","R"],words:[{w:"ŞEHİR",x:0,y:0,d:"H"},{w:"ŞER",x:0,y:0,d:"V"}],extras:["EŞ","RE","HER"]},
+  {id:45, letters:["B","A","H","A","R"],words:[{w:"BAHAR",x:0,y:0,d:"H"},{w:"BAR",x:0,y:0,d:"V"}],extras:["AH","HA","AB","ARA","HAR"]},
+  {id:46, letters:["Y","A","Ğ","I","Ş"],words:[{w:"YAĞIŞ",x:0,y:0,d:"H"},{w:"YAĞ",x:0,y:0,d:"V"}],extras:["AY","AŞ","ŞA"]},
+  {id:47, letters:["K","A","Y","A"],words:[{w:"KAYA",x:0,y:0,d:"H"},{w:"KAY",x:0,y:0,d:"V"}],extras:["AY","YA","AK"]},
+  {id:48, letters:["O","K","Y","A","N","U","S"],words:[{w:"OKYANUS",x:0,y:0,d:"H"},{w:"KANO",x:1,y:0,d:"V"}],extras:["OK","SU","SON","YAK"]},
+  {id:49, letters:["G","Ö","K","Y","Ü","Z","Ü"],words:[{w:"GÖKYÜZÜ",x:0,y:0,d:"H"},{w:"GÖZ",x:0,y:0,d:"V"}],extras:["ÖK","YÜZ","KÖY"]},
+  {id:50, letters:["B","İ","L","G","E"],words:[{w:"BİLGE",x:0,y:0,d:"H"},{w:"BİL",x:0,y:0,d:"V"},{w:"GEL",x:3,y:0,d:"V"}],extras:["İL","BEL","LİG"]}
+];
+
+/* =============================================================
+   STATE
+============================================================= */
+const ACCOUNTS = {deneme:'1234', admin:'1234'};
+let lvlIdx=0, coins=200, streak=0, soundOn=true;
+try{const s=JSON.parse(localStorage.getItem('kv5'));if(s){lvlIdx=Math.min(s.l||0,LEVELS.length-1);coins=s.c||200;streak=s.s||0;}}catch(e){}
+
+function persist(){
+  try{localStorage.setItem('kv5',JSON.stringify({l:lvlIdx,c:coins,s:streak}));}catch(e){}
+  const hc=ge('homeCoin'), gc=ge('gameCoin'), hl=ge('homeLevel');
+  if(hc)hc.textContent=coins;
+  if(gc)gc.textContent=coins;
+  if(hl)hl.textContent=lvlIdx+1;
+  const sb=ge('streakBadge');
+  if(sb){ge('streakNum').textContent=streak;sb.style.display=streak>=3?'block':'none';}
+}
+
+function ge(id){return document.getElementById(id);}
+
+/* =============================================================
+   SCREEN SWITCHING
+============================================================= */
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const el=ge(id+'-screen');
+  if(!el)return;
+  el.classList.add('active');
+  if(id==='game') setTimeout(initGame,60);
+  persist();
+}
+
+/* =============================================================
+   MODALS
+============================================================= */
+function openM(id){ge(id).classList.add('on');}
+function closeM(id){ge(id).classList.remove('on');}
+function claimReward(n){coins+=n;persist();toast('+'+n+' 🪙 Kazandın!');closeM('tasksM');}
+function buyCoins(n){coins+=n;persist();toast('+'+n+' 🪙 Satın alındı!');closeM('storeM');}
+function doLogout(){localStorage.removeItem('kv5');location.reload();}
+function toggleSound(){soundOn=!soundOn;ge('sndTxt').textContent=soundOn?'AÇIK':'KAPALI';}
+
+function toast(msg){
+  const t=ge('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+/* =============================================================
+   OWL
+============================================================= */
+const LO={pL:()=>ge('lo-pL'),pR:()=>ge('lo-pR'),wL:()=>ge('lo-wL'),wR:()=>ge('lo-wR'),bL:()=>ge('lo-bL'),bR:()=>ge('lo-bR'),hL:()=>ge('lo-hL'),hR:()=>ge('lo-hR'),eL:()=>ge('lo-eL'),eR:()=>ge('lo-eR')};
+const GO={pL:()=>ge('go-pL'),pR:()=>ge('go-pR'),wL:()=>ge('go-wL'),wR:()=>ge('go-wR'),bL:()=>ge('go-bL'),bR:()=>ge('go-bR'),hL:()=>ge('go-hL'),hR:()=>ge('go-hR'),eL:()=>ge('go-eL'),eR:()=>ge('go-eR')};
+
+function owlReset(o){
+  if(!o.pL())return;
+  o.pL().setAttribute('cx','75');o.pL().setAttribute('cy','75');
+  o.pR().setAttribute('cx','125');o.pR().setAttribute('cy','75');
+  o.pL().style.fill=o.pR().style.fill='#000';
+  o.pL().style.opacity=o.pR().style.opacity='1';
+  o.wL().style.transform=o.wR().style.transform='none';
+  o.bL().style.opacity=o.bR().style.opacity='0';
+  o.hL().style.opacity=o.hR().style.opacity='0';
+  if(o.eL){o.eL().style.opacity=o.eR().style.opacity='1';}
+}
+function owlHappy(o){
+  owlReset(o);if(!o.hL())return;
+  o.hL().style.opacity=o.hR().style.opacity='1';
+  if(o.eL){o.eL().style.opacity=o.eR().style.opacity='0';}
+  o.pL().style.opacity=o.pR().style.opacity='0';
+  o.wL().style.transform='rotate(20deg) translate(-5px,5px)';
+  o.wR().style.transform='rotate(-20deg) translate(5px,5px)';
+}
+function owlAngry(o){
+  owlReset(o);
+  o.bL().style.opacity=o.bR().style.opacity='1';
+  o.pL().style.fill=o.pR().style.fill='var(--r)';
+  o.wL().style.transform='rotate(-20deg) translate(-10px,10px)';
+  o.wR().style.transform='rotate(20deg) translate(10px,10px)';
+}
+function owlCover(o){
+  o.wL().style.transform='rotate(55deg) translate(38px,-52px) scaleX(1.3)';
+  o.wR().style.transform='rotate(-55deg) translate(-38px,-52px) scaleX(1.3)';
+}
+function owlPupils(o,dx,dy){
+  if(!o.pL())return;
+  o.pL().setAttribute('cx',75+dx);o.pL().setAttribute('cy',75+dy);
+  o.pR().setAttribute('cx',125+dx);o.pR().setAttribute('cy',75+dy);
+}
+
+/* =============================================================
+   LOGIN
+============================================================= */
+let loT;
+function switchTab(t){
+  ge('tabA').classList.toggle('on',t==='login');
+  ge('tabB').classList.toggle('on',t==='signup');
+  ge('paneLogin').classList.toggle('on',t==='login');
+  ge('paneSignup').classList.toggle('on',t==='signup');
+  owlReset(LO);ge('lmsg').textContent='';
+}
+document.querySelectorAll('.hide-i').forEach(inp=>{
+  inp.addEventListener('focus',()=>{owlReset(LO);owlCover(LO);});
+  inp.addEventListener('blur',()=>owlReset(LO));
+});
+document.querySelectorAll('.watch-i').forEach(inp=>{
+  inp.addEventListener('input',e=>{const dx=Math.min(8,Math.max(-8,(e.target.value.length/12)*12-6));owlPupils(LO,dx,0);});
+  inp.addEventListener('blur',()=>owlPupils(LO,0,0));
+});
+function doLogin(){
+  const user=ge('li-user').value.trim().toLowerCase();
+  const pass=ge('li-pass').value;
+  const msg=ge('lmsg');
+  owlReset(LO);
+  if(ACCOUNTS[user]===pass){
+    owlHappy(LO);msg.style.color='var(--g)';msg.textContent='✓ Hoş geldin, '+user+'!';
+    ge('userDisp').textContent='👤 '+user;
+    setTimeout(()=>showScreen('home'),900);
+  } else {
+    owlAngry(LO);msg.style.color='var(--r)';
+    msg.textContent=user in ACCOUNTS?'✗ Şifre hatalı!':'✗ Kullanıcı bulunamadı.';
+    const lb=ge('lbox');lb.classList.remove('shake');void lb.offsetWidth;lb.classList.add('shake');
+    clearTimeout(loT);loT=setTimeout(()=>owlReset(LO),1800);
+  }
+}
+function doSignup(){
+  owlHappy(LO);const msg=ge('lmsg');msg.style.color='var(--g)';msg.textContent='✓ Kayıt başarılı!';
+  clearTimeout(loT);loT=setTimeout(()=>switchTab('login'),1500);
+}
+function guestLogin(){
+  ge('userDisp').textContent='👤 Misafir';
+  showScreen('home');
+}
+
+/* =============================================================
+   GAME ENGINE
+============================================================= */
+const CW=265;
+const canvas=ge('canvas');
+const ctx=canvas.getContext('2d');
+
+let selL=[], letterPos=[], found=[], wordSet=[], drawing=false, owlT;
+
+function initGame(){
+  if(lvlIdx>=LEVELS.length)lvlIdx=0;
+  const lvl=LEVELS[lvlIdx];
+  ge('gameLvl').textContent=lvl.id;
+  selL=[];found=[];drawing=false;
+  owlReset(GO);
+  buildGrid(lvl);
+  wordSet=lvl.words.map(w=>w.w);
+  createWheel(lvl.letters);
+  updateProg();
+}
+
+function buildGrid(lvl){
+  const g=ge('gridWrap');g.innerHTML='';
+  const cells={};
+  lvl.words.forEach(wo=>{
+    let x=wo.x,y=wo.y;
+    for(let i=0;i<wo.w.length;i++){
+      const k=x+','+y;
+      if(!cells[k])cells[k]={ch:wo.w[i],x,y,ws:[]};
+      cells[k].ws.push(wo.w);
+      if(wo.d==='H')x++;else y++;
+    }
+  });
+  let mnX=99,mnY=99,mxX=-1,mxY=-1;
+  for(const k in cells){const c=cells[k];mnX=Math.min(mnX,c.x);mnY=Math.min(mnY,c.y);mxX=Math.max(mxX,c.x);mxY=Math.max(mxY,c.y);}
+  const S=46;
+  g.style.width=((mxX-mnX+1)*S)+'px';g.style.height=((mxY-mnY+1)*S)+'px';
+  for(const k in cells){
+    const c=cells[k];
+    const d=document.createElement('div');
+    d.className='cell';d.id='c-'+c.x+'-'+c.y;d.textContent=c.ch;
+    d.dataset.ws=c.ws.join(',');
+    d.style.left=((c.x-mnX)*S)+'px';d.style.top=((c.y-mnY)*S)+'px';
+    g.appendChild(d);
+  }
+}
+
+function createWheel(letters){
+  document.querySelectorAll('.lbtn').forEach(b=>b.remove());
+  letterPos=[];
+  const R=80,cx=CW/2,cy=CW/2;
+  letters.forEach((l,i)=>{
+    const a=(i*2*Math.PI/letters.length)-Math.PI/2;
+    const x=cx+R*Math.cos(a),y=cy+R*Math.sin(a);
+    const btn=document.createElement('div');
+    btn.className='lbtn';btn.textContent=l;
+    btn.style.left=(x-27)+'px';btn.style.top=(y-27)+'px';
+    ge('wheelArea').appendChild(btn);
+    letterPos.push({x,y,l,el:btn});
+  });
+}
+
+
+
+function updateProg(){
+  const main=LEVELS[lvlIdx].words.length;
+  const done=found.filter(f=>!f.startsWith('_x')).length;
+  ge('progTxt').textContent=done+'/'+main;
+}
+
+/* Canvas events */
+canvas.addEventListener('pointerdown',e=>{
+  e.preventDefault();drawing=true;selL=[];ctx.clearRect(0,0,CW,CW);onMove(e);
+},{passive:false});
+window.addEventListener('pointermove',e=>{if(drawing)onMove(e);},{passive:false});
+window.addEventListener('pointerup',()=>{if(drawing){drawing=false;commit();}});
+window.addEventListener('pointercancel',()=>{if(drawing){drawing=false;commit();}});
+
+function cxy(e){const r=canvas.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top};}
+
+function onMove(e){
+  const{x,y}=cxy(e);
+  owlPupils(GO,Math.max(-8,Math.min(8,(x-CW/2)/12)),Math.max(-3,Math.min(5,(y-CW/2)/18)));
+  letterPos.forEach(p=>{
+    if(!selL.includes(p)&&Math.hypot(p.x-x,p.y-y)<30){selL.push(p);p.el.classList.add('sel');}
+  });
+  const pw=ge('prevWord');
+  if(selL.length){pw.textContent=selL.map(s=>s.l).join('');pw.style.opacity='1';}
+  else pw.style.opacity='0';
+  drawLines(x,y);
+}
+
+function drawLines(cx,cy){
+  ctx.clearRect(0,0,CW,CW);
+  if(!selL.length)return;
+  const pts=selL.map(s=>({x:s.x,y:s.y}));
+  [['#000',14],['var(--y)',8]].forEach(([col,lw])=>{
+    ctx.beginPath();ctx.lineWidth=lw;ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle=col;
+    ctx.moveTo(pts[0].x,pts[0].y);pts.forEach(p=>ctx.lineTo(p.x,p.y));ctx.lineTo(cx,cy);ctx.stroke();
+  });
+}
+
+function commit(){
+  const word=selL.map(s=>s.l).join('');
+  ctx.clearRect(0,0,CW,CW);
+  selL.forEach(p=>p.el.classList.remove('sel'));
+  ge('prevWord').style.opacity='0';
+  owlPupils(GO,0,0);
+  if(word.length>=2)checkWord(word);
+}
+
+function undoLetter(){
+  if(!selL.length)return;
+  const removed=selL.pop();
+  removed.el.classList.remove('sel');
+  const pw=ge('prevWord');
+  if(selL.length){pw.textContent=selL.map(s=>s.l).join('');pw.style.opacity='1';}
+  else pw.style.opacity='0';
+  ctx.clearRect(0,0,CW,CW);
+  if(selL.length) drawLines(selL[selL.length-1].x, selL[selL.length-1].y);
+}
+
+function checkWord(word){
+  const lvl=LEVELS[lvlIdx];
+  if(wordSet.includes(word)&&!found.includes(word)){
+    found.push(word);revealWord(word);owlAnim('happy');
+    streak++;if(streak>=3){coins+=5;toast('🔥 '+streak+' Seri! +5 🪙');}
+    updateProg();persist();
+    playBeep(true);
+    if(found.filter(f=>!f.startsWith('_x')).length===wordSet.length)
+      setTimeout(()=>{launchConfetti();openM('winM');},700);
+  } else if(lvl.extras&&lvl.extras.map(w=>w.toUpperCase()).includes(word.toUpperCase())&&!found.includes('_x'+word)){
+    found.push('_x'+word);coins+=2;persist();owlAnim('happy');
+    toast('+2 🪙 BONUS: '+word+'!');playBeep(true);
+  } else {
+    owlAnim('angry');streak=0;persist();
+    const wa=ge('wheelArea');wa.classList.remove('shake');void wa.offsetWidth;wa.classList.add('shake');
+    playBeep(false);
+  }
+}
+
+function revealWord(word){
+  const wo=LEVELS[lvlIdx].words.find(w=>w.w===word);
+  if(!wo)return;
+  let x=wo.x,y=wo.y;
+  for(let i=0;i<word.length;i++){
+    const c=ge('c-'+x+'-'+y);
+    if(c){c.classList.add('found');c.classList.remove('hinted');}
+    if(wo.d==='H')x++;else y++;
+  }
+}
+
+function owlAnim(type){
+  clearTimeout(owlT);owlReset(GO);
+  if(type==='happy')owlHappy(GO);
+  else if(type==='angry')owlAngry(GO);
+  owlT=setTimeout(()=>owlReset(GO),1500);
+}
+
+/* Hints */
+function useHint(type){
+  const cost=type==='rocket'?100:25;
+  if(coins<cost){toast('Altın Yetersiz! 😢');return;}
+  const targets=[...document.querySelectorAll('.cell:not(.found):not(.hinted)')];
+  if(!targets.length)return;
+  coins-=cost;persist();
+  targets.sort(()=>Math.random()-.5).slice(0,type==='rocket'?3:1).forEach(c=>c.classList.add('hinted'));
+  owlAnim('happy');
+}
+
+function shuffleW(){
+  createWheel([...LEVELS[lvlIdx].letters].sort(()=>Math.random()-.5));
+}
+
+function nextLevel(){
+  lvlIdx++;coins+=50;persist();closeM('winM');
+  if(lvlIdx>=LEVELS.length){toast('🏆 Tüm seviyeleri bitirdin!');lvlIdx=0;persist();}
+  initGame();
+}
+
+/* =============================================================
+   AUDIO (Web Audio API - ses efektleri)
+============================================================= */
+let audioCtx=null;
+function getAudio(){
+  if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+  return audioCtx;
+}
+function playBeep(correct){
+  if(!soundOn)return;
+  try{
+    const ac=getAudio();
+    const osc=ac.createOscillator();
+    const gain=ac.createGain();
+    osc.connect(gain);gain.connect(ac.destination);
+    if(correct){
+      osc.frequency.setValueAtTime(523,ac.currentTime);
+      osc.frequency.setValueAtTime(659,ac.currentTime+0.1);
+      osc.frequency.setValueAtTime(784,ac.currentTime+0.2);
+      gain.gain.setValueAtTime(0.3,ac.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+0.4);
+      osc.start(ac.currentTime);osc.stop(ac.currentTime+0.4);
+    } else {
+      osc.frequency.setValueAtTime(220,ac.currentTime);
+      osc.frequency.setValueAtTime(180,ac.currentTime+0.15);
+      gain.gain.setValueAtTime(0.2,ac.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+0.3);
+      osc.start(ac.currentTime);osc.stop(ac.currentTime+0.3);
+    }
+  }catch(e){}
+}
+
+/* =============================================================
+   CONFETTİ
+============================================================= */
+function launchConfetti(){
+  const colors=['#fcd53f','#ff4757','#2ed573','#8c7ae6','#fff'];
+  for(let i=0;i<90;i++){
+    setTimeout(()=>{
+      const c=document.createElement('div');
+      c.className='confetti-p';
+      c.style.left=Math.random()*100+'vw';
+      c.style.top='-12px';
+      c.style.background=colors[Math.floor(Math.random()*colors.length)];
+      c.style.animationDuration=(2+Math.random()*3)+'s';
+      c.style.animationDelay='0s';
+      c.style.width=(8+Math.random()*8)+'px';
+      c.style.height=(8+Math.random()*8)+'px';
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(),5500);
+    },i*30);
+  }
+}
+
+/* =============================================================
+   INIT
+============================================================= */
+persist();
+</script>
+</body>
+</html>

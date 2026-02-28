@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/game_provider.dart';
 import '../theme/brutalist_theme.dart';
+import '../screens/login_screen.dart';
+import '../services/auth_service.dart';
 import 'game_screen.dart';
-import 'leaderboard_screen.dart';
+import '../widgets/market_modal.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,55 +13,73 @@ class HomeScreen extends StatelessWidget {
   void _showModal(BuildContext context, String title, Widget content) {
     showDialog(
       context: context,
-      barrierColor: Colors.black.withValues(alpha: 0.75),
+      barrierColor: Colors.black.withValues(alpha: 0.85),
       builder: (context) {
         return Center(
           child: Material(
             color: Colors.transparent,
-            child: Container(
-              width: 360,
-              padding: const EdgeInsets.all(25),
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  BrutalistBox(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        BrutalistBox(
-                          backgroundColor: BrutalistTheme.accentYellow,
-                          padding: 8,
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: Text(
-                            title,
-                            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 340),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
+                      decoration: BoxDecoration(
+                        color: BrutalistTheme.white,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: BrutalistTheme.black, width: 5),
+                        boxShadow: const [
+                          BoxShadow(color: BrutalistTheme.black, offset: Offset(8, 8)),
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            title.toUpperCase(),
+                            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900, letterSpacing: 1.5),
                             textAlign: TextAlign.center,
                           ),
-                        ),
-                        content,
-                      ],
+                          const SizedBox(height: 20),
+                          content,
+                        ],
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    top: -15,
-                    right: -15,
-                    child: GestureDetector(
-                      onTap: () => Navigator.of(context).pop(),
-                      child: Container(
-                        width: 45,
-                        height: 45,
-                        decoration: BoxDecoration(
-                          color: BrutalistTheme.accentRed,
-                          shape: BoxShape.circle,
-                          border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
-                        ),
-                        child: const Center(
-                          child: Text("X", style: TextStyle(color: BrutalistTheme.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                    Positioned(
+                      top: -16,
+                      right: -16,
+                      child: GestureDetector(
+                        onTap: () => Navigator.of(context).pop(),
+                        child: Container(
+                          width: 48,
+                          height: 48,
+                          decoration: BoxDecoration(
+                            color: BrutalistTheme.accentRed,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: BrutalistTheme.black, width: 4),
+                            boxShadow: const [
+                              BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4)),
+                            ],
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "✕",
+                              style: TextStyle(
+                                color: BrutalistTheme.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -73,199 +93,386 @@ class HomeScreen extends StatelessWidget {
     final provider = context.watch<GameProvider>();
 
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: [
-            // Header
-            Positioned(
-              top: 20,
-              left: 20,
-              right: 20,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  BrutalistBox(
-                    backgroundColor: BrutalistTheme.accentYellow,
-                    padding: 10,
-                    child: Row(
-                      children: [
-                        Text("${provider.totalCoins}", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
-                        const SizedBox(width: 8),
-                        const Text("🪙", style: TextStyle(fontSize: 20)),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      _showModal(context, "AYARLAR", Column(
-                        mainAxisSize: MainAxisSize.min,
+      backgroundColor: BrutalistTheme.nightBg,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final isSmallScreen = constraints.maxHeight < 600;
+          return Stack(
+            children: [
+              Positioned.fill(
+                child: CustomPaint(
+                  painter: DottedBackgroundPainter(),
+                ),
+              ),
+              SafeArea(
+                child: Column(
+                  children: [
+                    // Top Navigation Bar
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          BrutalistButton(
-                            padding: 12,
-                            onPressed: () {},
-                            child: const Text("🔊 SES: AÇIK", style: TextStyle(fontWeight: FontWeight.bold)),
+                          _buildBox(
+                            bg: BrutalistTheme.accentYellow,
+                            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  "${provider.totalCoins}",
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w900,
+                                    letterSpacing: 1,
+                                  ),
+                                ),
+                                const SizedBox(width: 6),
+                                const Text("🪙", style: TextStyle(fontSize: 18)),
+                              ],
+                            ),
                           ),
-                          const SizedBox(height: 10),
-                          BrutalistButton(
-                            padding: 12,
-                            backgroundColor: BrutalistTheme.accentRed,
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: const Text("KAPAT", style: TextStyle(color: BrutalistTheme.white, fontWeight: FontWeight.bold)),
+                          GestureDetector(
+                            onTap: () {
+                              _showModal(
+                                context,
+                                "AYARLAR",
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    _buildModalButton(
+                                      label: "🔊 SES: ${provider.soundOn ? 'AÇIK' : 'KAPALI'}",
+                                      bg: BrutalistTheme.white,
+                                      onTap: () => provider.toggleSound(),
+                                    ),
+                                    const SizedBox(height: 12),
+                                    _buildModalButton(
+                                      label: "Sıfırla & Çıkış",
+                                      bg: BrutalistTheme.accentRed,
+                                      textColor: BrutalistTheme.white,
+                                      onTap: () async {
+                                        await AuthService.signOut();
+                                        if (context.mounted) {
+                                          Navigator.of(context).pop();
+                                          Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(builder: (_) => const LoginScreen()),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            child: _buildBox(
+                              padding: const EdgeInsets.all(12),
+                              child: const Text("⚙️", style: TextStyle(fontSize: 20)),
+                            ),
                           ),
                         ],
-                      ));
-                    },
-                    child: const BrutalistBox(
-                      padding: 10,
-                      child: Text("⚙️", style: TextStyle(fontSize: 20)),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
 
-            // Sidebar
-            Positioned(
-              left: 20,
-              top: 100,
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      int progress = provider.completedTasksProgress;
-                      int limit = provider.tasksCompletedLimit;
-                      _showModal(context, "GÖREVLER", Column(
-                        mainAxisSize: MainAxisSize.min,
+                    // Side Bar & Streak Area
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           const Text("5 Seviye Tamamla", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                           const SizedBox(height: 10),
-                           Stack(
-                             children: [
-                               Container(
-                                 height: 20,
-                                 width: double.infinity,
-                                 decoration: BoxDecoration(
-                                   color: Colors.grey.shade300,
-                                   borderRadius: BorderRadius.circular(10),
-                                   border: Border.all(color: BrutalistTheme.black, width: 2.5),
-                                 ),
-                               ),
-                               FractionallySizedBox(
-                                 widthFactor: progress / limit,
-                                 child: Container(
-                                   height: 20,
-                                   decoration: BoxDecoration(
-                                     color: BrutalistTheme.accentGreen,
-                                     borderRadius: BorderRadius.circular(10),
-                                   ),
-                                 ),
-                               ),
-                             ],
-                           ),
-                           const SizedBox(height: 10),
-                           Text("$progress / $limit"),
-                           const SizedBox(height: 20),
-                           BrutalistButton(
-                             backgroundColor: progress == 0 && provider.currentLevelIndex > 0 ? BrutalistTheme.accentYellow : Colors.grey.shade300,
-                             onPressed: () {
-                                if (progress == 0 && provider.currentLevelIndex > 0) {
-                                  provider.claimTaskReward();
-                                  Navigator.of(context).pop();
-                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Görev Ödülü Alındı!")));
-                                }
-                             },
-                             child: const Text("ÖDÜLÜ AL (100 🪙)", style: TextStyle(fontWeight: FontWeight.bold)),
-                           ),
+                          Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  int progress = provider.completedTasksProgress;
+                                  int limit = provider.tasksCompletedLimit;
+                                  _showModal(
+                                    context,
+                                    "GÖREVLER",
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        _buildTaskRow(
+                                          "10 Ekstra Kelime Bul",
+                                          1.0,
+                                          BrutalistTheme.accentYellow,
+                                          "+50🪙",
+                                          () {
+                                            provider.claimReward(50);
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        const SizedBox(height: 8),
+                                        _buildTaskRow(
+                                          "5 Bölüm Geç",
+                                          progress / limit,
+                                          Colors.grey.shade300,
+                                          "$progress/$limit",
+                                          null,
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                child: _buildBox(
+                                  padding: const EdgeInsets.all(12),
+                                  child: const Text("📋", style: TextStyle(fontSize: 22)),
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              GestureDetector(
+                                onTap: () => provider.claimReward(50),
+                                child: _buildBox(
+                                  padding: const EdgeInsets.all(12),
+                                  child: const Text("🎁", style: TextStyle(fontSize: 22)),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Expanded(
+                            child: provider.streak >= 3
+                                ? Center(
+                                    child: Container(
+                                      margin: const EdgeInsets.only(top: 10),
+                                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                                      decoration: BoxDecoration(
+                                        color: BrutalistTheme.accentRed,
+                                        borderRadius: BorderRadius.circular(30),
+                                        border: Border.all(color: BrutalistTheme.black, width: 4),
+                                        boxShadow: const [
+                                          BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4)),
+                                        ],
+                                      ),
+                                      child: Text(
+                                        "🔥 ${provider.streak} SERİ",
+                                        style: const TextStyle(
+                                          color: BrutalistTheme.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w900,
+                                          letterSpacing: 1,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : const SizedBox.shrink(),
+                          ),
+                          // Balances out the side bar visually
+                          const SizedBox(width: 50),
                         ],
-                      ));
-                    },
-                    child: const BrutalistBox(
-                      padding: 10,
-                      child: Text("📋", style: TextStyle(fontSize: 26)),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 15),
-                  GestureDetector(
-                    onTap: () {
-                      _showModal(context, "GÜNLÜK HEDİYE", Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                           const Text("Her gün giriş yap, 50 altın kazan!", style: TextStyle(fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
-                           const SizedBox(height: 20),
-                           BrutalistButton(
-                             backgroundColor: provider.isGiftClaimedToday ? Colors.grey.shade300 : BrutalistTheme.accentYellow,
-                             onPressed: () {
-                               if (!provider.isGiftClaimedToday) {
-                                 provider.claimDailyGift();
-                                 Navigator.of(context).pop();
-                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("50 Altın Eklendi!")));
-                               }
-                             },
-                             child: Text(provider.isGiftClaimedToday ? "ALINDI" : "HEDİYEYİ AL", style: const TextStyle(fontWeight: FontWeight.bold)),
-                           ),
-                        ],
-                      ));
-                    },
-                    child: const BrutalistBox(
-                      padding: 10,
-                      child: Text("🎁", style: TextStyle(fontSize: 26)),
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  GestureDetector(
-                    onTap: () {
-                       Navigator.push(context, MaterialPageRoute(builder: (_) => const LeaderboardScreen()));
-                    },
-                    child: const BrutalistBox(
-                      padding: 10,
-                      child: Text("🏆", style: TextStyle(fontSize: 26)),
-                    ),
-                  ),
-                ],
-              ),
-            ),
 
-            // Center Content
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  BrutalistBox(
-                    child: Text(
-                      "SEVİYE ${provider.currentLevel.id}",
-                      style: const TextStyle(fontSize: 36, fontWeight: FontWeight.w900),
+                    Expanded(
+                      child: Center(
+                        child: SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              _buildBox(
+                                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 18),
+                                child: Text(
+                                  "BÖLÜM ${provider.currentLevel.id}",
+                                  style: const TextStyle(
+                                    fontSize: 32,
+                                    fontWeight: FontWeight.w900,
+                                    letterSpacing: 2,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              SizedBox(height: isSmallScreen ? 20 : 30),
+                              SizedBox(
+                                width: 280,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (_) => const GameScreen()),
+                                    );
+                                  },
+                                  child: _buildBox(
+                                    bg: BrutalistTheme.accentYellow,
+                                    padding: EdgeInsets.symmetric(vertical: isSmallScreen ? 20 : 26),
+                                    child: const Center(
+                                      child: Text(
+                                        "OYNA ▶",
+                                        style: TextStyle(
+                                          fontSize: 32,
+                                          fontWeight: FontWeight.w900,
+                                          letterSpacing: 2,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 18),
+                              SizedBox(
+                                width: 280,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    _showModal(context, "MARKET", const MarketModalContent());
+                                  },
+                                  child: _buildBox(
+                                    padding: const EdgeInsets.symmetric(vertical: 14),
+                                    child: const Center(
+                                      child: Text(
+                                        "🛒 MARKET",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w900,
+                                          letterSpacing: 1,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 40),
-                  SizedBox(
-                    width: 250,
-                    child: BrutalistButton(
-                      backgroundColor: BrutalistTheme.accentYellow,
-                      padding: 20,
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) => const GameScreen()),
-                        );
-                      },
-                      child: const Text("OYNA", style: TextStyle(fontSize: 32, fontWeight: FontWeight.w900)),
+
+                    // User Info Footer
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16, top: 4),
+                      child: Text(
+                        "👤 ${AuthService.displayName}",
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.white.withValues(alpha: 0.6),
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 1,
+                        ),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: 250,
-                    child: BrutalistButton(
-                      padding: 15,
-                      onPressed: () {
-                        _showModal(context, "MARKET", const Text("Market yakında...", style: TextStyle(fontWeight: FontWeight.bold)));
-                      },
-                      child: const Text("🛒 MARKET", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900)),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildBox({
+    Color bg = BrutalistTheme.white,
+    EdgeInsetsGeometry padding = const EdgeInsets.all(12),
+    required Widget child,
+  }) {
+    return Container(
+      padding: padding,
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: BrutalistTheme.black, width: 4),
+        boxShadow: const [
+          BoxShadow(color: BrutalistTheme.black, offset: Offset(6, 6)),
+        ],
+      ),
+      child: child,
+    );
+  }
+
+  Widget _buildModalButton({
+    required String label,
+    Color bg = BrutalistTheme.white,
+    Color textColor = BrutalistTheme.black,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        decoration: BoxDecoration(
+          color: bg,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: BrutalistTheme.black, width: 4),
+          boxShadow: const [
+            BoxShadow(color: BrutalistTheme.black, offset: Offset(5, 5)),
           ],
         ),
+        child: Center(
+          child: Text(
+            label,
+            style: TextStyle(
+              fontWeight: FontWeight.w900,
+              color: textColor,
+              fontSize: 16,
+              letterSpacing: 1,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTaskRow(String title, double progress, Color btnBg, String btnLabel, VoidCallback? onTap) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: const BoxDecoration(
+        border: Border(bottom: BorderSide(color: Color(0xFFE0E0E0), width: 3)),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14),
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  height: 14,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFDDDDDD),
+                    borderRadius: BorderRadius.circular(7),
+                    border: Border.all(color: BrutalistTheme.black, width: 3),
+                  ),
+                  child: FractionallySizedBox(
+                    alignment: Alignment.centerLeft,
+                    widthFactor: progress.clamp(0.0, 1.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: BrutalistTheme.accentGreen,
+                        borderRadius: BorderRadius.circular(4),
+                        border: const Border(
+                          right: BorderSide(color: BrutalistTheme.black, width: 3),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 14),
+          GestureDetector(
+            onTap: onTap,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              decoration: BoxDecoration(
+                color: btnBg,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: BrutalistTheme.black, width: 3),
+                boxShadow: const [
+                  BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4)),
+                ],
+              ),
+              child: Text(
+                btnLabel,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
