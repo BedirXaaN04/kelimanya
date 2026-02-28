@@ -14,16 +14,28 @@ import 'services/notification_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    debugPrint("Firebase initialization failed: \$e");
+  }
   
   if (!kIsWeb) {
-    await AdService().initialize();
+    try {
+      await AdService().initialize();
+    } catch (e) {
+      debugPrint("AdMob initialization failed: \$e");
+    }
   }
   
   // Platform bağımsız bildirimleri başlat
-  await NotificationService.initialize();
+  try {
+    await NotificationService.initialize();
+  } catch (e) {
+    debugPrint("Notification initialization failed: \$e");
+  }
   
   runApp(
     MultiProvider(
