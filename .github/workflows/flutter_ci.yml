@@ -31,21 +31,7 @@ jobs:
       - name: Analyze code
         run: flutter analyze
 
-      - name: Restore missing Android project files
-        run: |
-          mkdir -p /tmp/android_backup/app/src/main
-          cp android/build.gradle /tmp/android_backup/ || true
-          cp android/app/build.gradle /tmp/android_backup/app/ || true
-          cp android/app/google-services.json /tmp/android_backup/app/ || true
-          cp android/app/src/main/AndroidManifest.xml /tmp/android_backup/app/src/main/ || true
-          
-          rm -rf android/
-          yes | flutter create . --platforms android || true
-          
-          cp /tmp/android_backup/build.gradle android/build.gradle || true
-          cp /tmp/android_backup/app/build.gradle android/app/build.gradle || true
-          cp /tmp/android_backup/app/google-services.json android/app/google-services.json || true
-          cp /tmp/android_backup/app/src/main/AndroidManifest.xml android/app/src/main/AndroidManifest.xml || true
+
 
       - name: Build APK
         run: flutter build apk --release
