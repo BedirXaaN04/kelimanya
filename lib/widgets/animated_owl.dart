@@ -55,10 +55,10 @@ class _AnimatedOwlState extends State<AnimatedOwl> with TickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    final purple = const Color(0xff8c7ae6);
-    final bellyColor = const Color(0xfff5f6fa);
-    final yellow = const Color(0xfffcd53f);
-    final stroke = 4.0; 
+    const purple = Color(0xff8c7ae6);
+    const bellyColor = Color(0xfff5f6fa);
+    const yellow = Color(0xfffcd53f);
+    const stroke = 4.0; 
 
     return FittedBox(
       fit: BoxFit.contain,

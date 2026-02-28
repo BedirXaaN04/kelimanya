@@ -24,7 +24,7 @@ void main() {
     List<String> before = lines.sublist(0, startIdx);
     List<String> after = lines.sublist(endIdx);
     
-    String finalContent = before.join('\\n') + '\\n' + newLevels + '\\n' + after.join('\\n') + '\\n';
+    String finalContent = '${before.join('\\n')}\\n$newLevels\\n${after.join('\\n')}\\n';
     modelFile.writeAsStringSync(finalContent);
     print('Injection successful.');
   } else {

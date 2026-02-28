@@ -42,7 +42,7 @@ class BrutalistBox extends StatelessWidget {
   final BorderStyle borderStyle;
 
   const BrutalistBox({
-    Key? key,
+    super.key,
     required this.child,
     this.backgroundColor = BrutalistTheme.white,
     this.padding = 20.0,
@@ -50,7 +50,7 @@ class BrutalistBox extends StatelessWidget {
     this.borderRadius = 12.0,
     this.borderColor = BrutalistTheme.black,
     this.borderStyle = BorderStyle.solid,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -87,18 +87,18 @@ class BrutalistButton extends StatefulWidget {
   final double padding;
 
   const BrutalistButton({
-    Key? key,
+    super.key,
     required this.child,
     required this.onPressed,
     this.backgroundColor = BrutalistTheme.white,
     this.padding = 15.0,
-  }) : super(key: key);
+  });
 
   @override
-  _BrutalistButtonState createState() => _BrutalistButtonState();
+  State<BrutalistButton> createState() => BrutalistButtonState();
 }
 
-class _BrutalistButtonState extends State<BrutalistButton> {
+class BrutalistButtonState extends State<BrutalistButton> {
   bool _isPressed = false;
 
   void _handleTapDown(TapDownDetails details) {

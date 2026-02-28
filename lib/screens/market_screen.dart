@@ -72,7 +72,7 @@ class MarketScreen extends StatelessWidget {
               const Text("🪙", style: TextStyle(fontSize: 14)),
               const SizedBox(width: 4),
               Text(
-                "\${provider.totalCoins}",
+                "${provider.totalCoins}",
                 style: const TextStyle(fontWeight: FontWeight.w900, color: BrutalistTheme.black, fontSize: 16),
               ),
             ],
