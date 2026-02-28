@@ -38,39 +38,45 @@ class MarketModalContent extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: themeInfo.gradientColors,
-                        ),
-                        border: Border.all(color: BrutalistTheme.black, width: 2),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                    ),
-                    const SizedBox(width: 15),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          themeInfo.name,
-                          style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          isUnlocked ? "Açık" : "${themeInfo.cost} 🪙",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: isUnlocked ? BrutalistTheme.accentGreen : BrutalistTheme.accentRed,
+                Expanded(
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: themeInfo.gradientColors,
                           ),
+                          border: Border.all(color: BrutalistTheme.black, width: 2),
+                          borderRadius: BorderRadius.circular(4),
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      const SizedBox(width: 15),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              themeInfo.name,
+                              style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              isUnlocked ? "Açık" : "${themeInfo.cost} 🪙",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: isUnlocked ? BrutalistTheme.accentGreen : BrutalistTheme.accentRed,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                const SizedBox(width: 8),
                 _buildActionBtn(context, provider, themeInfo, isUnlocked, isActive),
               ],
             ),

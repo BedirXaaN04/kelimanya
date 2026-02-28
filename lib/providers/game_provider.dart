@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'dart:async';
+import 'dart:math';
 import '../models/level_model.dart';
 import '../models/theme_model.dart';
 import '../services/ad_service.dart';
@@ -35,9 +37,11 @@ class GameProvider extends ChangeNotifier {
   // Sound
   bool soundOn = true;
 
-  // Owl Reactions
+  // Owl Reactions & Interactivity
   bool isOwlHappy = false;
   bool isOwlAngry = false;
+  bool isOwlSulking = false;
+  Alignment owlPosition = Alignment.topCenter;
   
   String activeThemeId = "default";
   List<String> unlockedThemes = ["default"];
@@ -46,8 +50,23 @@ class GameProvider extends ChangeNotifier {
   
   LevelModel get currentLevel => gameLevels[currentLevelIndex % gameLevels.length];
 
+  int consecutiveWrongGuesses = 0;
+  int targetWrongGuessesForOwl = 3;
+
   GameProvider() {
     _loadData();
+    _resetOwlTarget();
+  }
+
+  void _resetOwlTarget() {
+    // Generate a random target between 3 and 10
+    targetWrongGuessesForOwl = Random().nextInt(8) + 3; 
+    consecutiveWrongGuesses = 0;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   Future<void> _loadData() async {
@@ -219,6 +238,9 @@ class GameProvider extends ChangeNotifier {
             showToast('🔥 $streak Seri! +5 🪙');
           }
           
+          // Reset consecutive errors since user found a real word
+          consecutiveWrongGuesses = 0;
+          
           // Check for surprise tile
           if (surpriseTileCoordinate != null && !isSurpriseFound) {
             for (int i = 0; i < target.word.length; i++) {
@@ -252,6 +274,7 @@ class GameProvider extends ChangeNotifier {
         foundWords.add('_x$wordStr');
         totalCoins += 2;
         showToast('+2 🪙 BONUS: $wordStr!');
+        consecutiveWrongGuesses = 0; // Reset consecutive wrongs on bonus word
         triggerHappyOwl();
         _saveData();
         notifyListeners();
@@ -260,9 +283,17 @@ class GameProvider extends ChangeNotifier {
     }
     
     if (!isTarget) {
-      // Wrong word — reset streak (from HTML)
+      // Wrong word
       streak = 0;
+      consecutiveWrongGuesses++;
+      
       triggerAngryOwl();
+      
+      if (consecutiveWrongGuesses >= targetWrongGuessesForOwl && !isOwlSulking) {
+        triggerOwlWander();
+        _resetOwlTarget(); // set a new random target for next time
+      }
+      
       _saveData();
       notifyListeners();
     }
@@ -273,6 +304,7 @@ class GameProvider extends ChangeNotifier {
   void triggerHappyOwl() {
     isOwlHappy = true;
     isOwlAngry = false;
+    isOwlSulking = false;
     notifyListeners();
     Future.delayed(const Duration(milliseconds: 1500), () {
       isOwlHappy = false;
@@ -288,6 +320,30 @@ class GameProvider extends ChangeNotifier {
       isOwlAngry = false;
       notifyListeners();
     });
+  }
+
+  void triggerOwlWander() {
+    final random = Random();
+    // Generate random alignment limits allowing the owl to move across the screen bounds
+    // Avoid exact edges so it stays visible (-0.8 to 0.8)
+    double newX = (random.nextDouble() * 1.6) - 0.8; 
+    double newY = (random.nextDouble() * 1.6) - 0.8;
+    
+    // Switch state to sulking
+    isOwlSulking = true;
+    isOwlAngry = true;
+    owlPosition = Alignment(newX, newY);
+    notifyListeners();
+  }
+
+  void tapOwl() {
+    if (isOwlSulking) {
+      // Owl is happy you noticed it and returns home
+      isOwlSulking = false;
+      isOwlAngry = false;
+      owlPosition = Alignment.topCenter;
+      triggerHappyOwl();
+    }
   }
 
   bool isLevelCompleted() {

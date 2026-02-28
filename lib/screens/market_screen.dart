@@ -11,7 +11,7 @@ class MarketScreen extends StatelessWidget {
     final provider = context.watch<GameProvider>();
 
     return Scaffold(
-      backgroundColor: BrutalistTheme.nightBg,
+      backgroundColor: provider.currentTheme.primaryColor,
       appBar: _buildAppBar(context, provider),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -41,7 +41,7 @@ class MarketScreen extends StatelessWidget {
 
   PreferredSizeWidget _buildAppBar(BuildContext context, GameProvider provider) {
     return AppBar(
-      backgroundColor: BrutalistTheme.nightBg,
+      backgroundColor: provider.currentTheme.primaryColor,
       elevation: 0,
       centerTitle: true,
       leading: IconButton(

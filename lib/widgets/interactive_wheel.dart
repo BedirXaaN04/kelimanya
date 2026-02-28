@@ -37,11 +37,11 @@ class _InteractiveWheelState extends State<InteractiveWheel> {
   void _calculatePositions() {
     if (_wheelKey.currentContext == null) return;
     
-    final RenderBox renderBox = _wheelKey.currentContext!.findRenderObject() as RenderBox;
+    final renderBox = _wheelKey.currentContext!.findRenderObject() as RenderBox;
     final size = renderBox.size;
     final center = Offset(size.width / 2, size.height / 2);
     final minDimension = min(size.width, size.height);
-    final radius = minDimension / 2 - 35; // 35 is button radius approx
+    final radius = minDimension / 2 - 26; // 26 is button radius approx
     
     List<Offset> positions = [];
     double step = (2 * pi) / widget.letters.length;
@@ -179,25 +179,25 @@ class _InteractiveWheelState extends State<InteractiveWheel> {
               ...List.generate(_letterPositions.length, (i) {
                 bool isSelected = _selectedIndices.contains(i);
                 return Positioned(
-                  left: _letterPositions[i].dx - 33,
-                  top: _letterPositions[i].dy - 33,
+                  left: _letterPositions[i].dx - 26, // Center offset (half of 52)
+                  top: _letterPositions[i].dy - 26,
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 100),
-                    width: 66,
-                    height: 66,
+                    width: 52, // Smaller button
+                    height: 52,
                     decoration: BoxDecoration(
                       color: isSelected ? BrutalistTheme.white : BrutalistTheme.accentYellow,
                       shape: BoxShape.circle,
-                      border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
+                      border: Border.all(color: BrutalistTheme.black, width: 3), // Slightly thinner border
                       boxShadow: isSelected ? [] : const [
-                        BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4)),
+                        BoxShadow(color: BrutalistTheme.black, offset: Offset(3, 3)),
                       ],
                     ),
-                    transform: isSelected ? Matrix4.translationValues(4.0, 4.0, 0.0) : Matrix4.identity(),
+                    transform: isSelected ? Matrix4.translationValues(3.0, 3.0, 0.0) : Matrix4.identity(),
                     child: Center(
                       child: Text(
                         widget.letters[i],
-                        style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w900),
+                        style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w900), // Scaled text
                       ),
                     ),
                   ),

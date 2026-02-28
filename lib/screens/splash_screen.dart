@@ -64,44 +64,34 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             },
           ),
 
-          // Loading bar at bottom
-          SafeArea(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 40),
-                child: Container(
-                  height: 24,
-                  constraints: const BoxConstraints(maxWidth: 400),
-                  decoration: BoxDecoration(
-                    color: BrutalistTheme.white,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: BrutalistTheme.black, width: 4),
-                    boxShadow: const [
-                      BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4)),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: AnimatedBuilder(
-                      animation: _progressController,
-                      builder: (context, _) {
-                        return FractionallySizedBox(
-                          alignment: Alignment.centerLeft,
-                          widthFactor: _progressController.value,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: BrutalistTheme.accentYellow,
-                              borderRadius: BorderRadius.circular(8),
-                              border: const Border(
-                                right: BorderSide(color: BrutalistTheme.black, width: 4),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+          // Loading bar embedded into the image's empty slot
+          Positioned(
+            bottom: 110,
+            left: 55,
+            right: 55,
+            child: Container(
+              height: 20,
+              decoration: BoxDecoration(
+                color: Colors.transparent, // Invisible track to let image show through
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: AnimatedBuilder(
+                  animation: _progressController,
+                  builder: (context, _) {
+                    return FractionallySizedBox(
+                      alignment: Alignment.centerLeft,
+                      widthFactor: _progressController.value,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: BrutalistTheme.accentYellow,
+                          borderRadius: BorderRadius.circular(10),
+                          // No harsh black borders to blend with image
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),

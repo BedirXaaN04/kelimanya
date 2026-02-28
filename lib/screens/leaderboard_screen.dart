@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 import '../theme/brutalist_theme.dart';
-
+import '../providers/game_provider.dart';
 class LeaderboardScreen extends StatelessWidget {
   const LeaderboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<GameProvider>(); // Fetch provider
     return Scaffold(
-      backgroundColor: BrutalistTheme.bgBlue,
+      backgroundColor: provider.currentTheme.primaryColor,
       appBar: AppBar(
-        title: const Text('TR SIRALAMASI', style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: BrutalistTheme.bgBlue,
+        title: const Text("Liderlik Tablosu"),
+        backgroundColor: provider.currentTheme.primaryColor,
         elevation: 0,
       ),
       body: StreamBuilder<QuerySnapshot>(

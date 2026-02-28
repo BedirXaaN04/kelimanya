@@ -121,11 +121,15 @@ class _GameScreenState extends State<GameScreen> {
     });
 
     return Scaffold(
-      body: Container(
-        color: BrutalistTheme.nightBg,
-        child: Stack(
-          children: [
-            // Dotted Background
+      backgroundColor: BrutalistTheme.nightBg, // fallback for Scaffold area out of safe container
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 600), // Max width for desktop/tablet professional look
+          child: Container(
+            color: provider.currentTheme.primaryColor,
+            child: Stack(
+              children: [
+                // Dotted Background
             Positioned.fill(
               child: CustomPaint(
                 painter: _DottedBgPainter(),
@@ -140,16 +144,8 @@ class _GameScreenState extends State<GameScreen> {
 
                   const SizedBox(height: 4),
 
-                  SizedBox(
-                    width: 60,
-                    height: 60,
-                    child: AnimatedOwl(
-                      isHappy: provider.isOwlHappy || (provider.isLevelCompleted() && provider.foundWords.isNotEmpty),
-                      isAngry: provider.isOwlAngry,
-                    ),
-                  ),
-
-                  const SizedBox(height: 4),
+                  // Owl removed from here, now in an overlay Stack
+                  const SizedBox(height: 64), // Keep vertical pacing
 
                   // ── GRID + HINTS ROW ──
                   Expanded(
@@ -219,7 +215,35 @@ class _GameScreenState extends State<GameScreen> {
             // Toast notification
             if (provider.toastMessage != null)
               ToastNotification(message: provider.toastMessage),
+              
+            // Interactive Owl Overlay Layer
+            AnimatedAlign(
+              duration: const Duration(seconds: 2),
+              curve: Curves.easeInOutCubic,
+              alignment: provider.owlPosition,
+              child: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 80.0), // Padding offset from standard position
+                  child: GestureDetector(
+                    onTap: () {
+                       // Tapping the owl plays tap logic natively
+                       provider.tapOwl();
+                    },
+                    child: SizedBox(
+                      width: provider.isOwlSulking ? 80 : 60, // Owl scales slightly when mad/sulking
+                      height: provider.isOwlSulking ? 80 : 60,
+                      child: AnimatedOwl(
+                        isHappy: provider.isOwlHappy || (provider.isLevelCompleted() && provider.foundWords.isNotEmpty),
+                        isAngry: provider.isOwlSulking || provider.isOwlAngry,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
+        ),
+          ),
         ),
       ),
     );

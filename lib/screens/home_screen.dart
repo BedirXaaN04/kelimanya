@@ -93,18 +93,21 @@ class HomeScreen extends StatelessWidget {
     final provider = context.watch<GameProvider>();
 
     return Scaffold(
-      backgroundColor: BrutalistTheme.nightBg,
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final isSmallScreen = constraints.maxHeight < 600;
-          return Stack(
-            children: [
-              Positioned.fill(
-                child: CustomPaint(
-                  painter: DottedBackgroundPainter(),
-                ),
-              ),
-              SafeArea(
+      backgroundColor: provider.currentTheme.primaryColor,
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 600), // Enforce center max width
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final isSmallScreen = constraints.maxHeight < 600;
+              return Stack(
+                children: [
+                  Positioned.fill(
+                    child: CustomPaint(
+                      painter: DottedBackgroundPainter(),
+                    ),
+                  ),
+                  SafeArea(
                 child: Column(
                   children: [
                     // Top Navigation Bar
@@ -353,7 +356,9 @@ class HomeScreen extends StatelessWidget {
           );
         },
       ),
-    );
+    ),
+  ),
+);
   }
 
   Widget _buildBox({
