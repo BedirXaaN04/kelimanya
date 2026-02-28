@@ -90,7 +90,7 @@ class CrosswordGrid extends StatelessWidget {
                         letter: cell['letter'],
                         isFound: cell['isFound'],
                         isHinted: cell['isHinted'] ?? false,
-                        isSurpriseTile: provider.surpriseTileCoordinate == "$cx_$cy" && !provider.isSurpriseFound,
+                        isSurpriseTile: provider.surpriseTileCoordinate == "${cx}_$cy" && !provider.isSurpriseFound,
                       ),
                     );
                   }).toList(),

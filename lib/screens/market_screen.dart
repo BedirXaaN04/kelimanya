@@ -125,7 +125,7 @@ class MarketScreen extends StatelessWidget {
   }
 
   Widget _buildAvatarGrid(BuildContext context, GameProvider provider) {
-    return const Container(
+    return Container(
       padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
       decoration: BoxDecoration(
         color: BrutalistTheme.grey,
@@ -165,7 +165,7 @@ class MarketScreen extends StatelessWidget {
   }
   
   Widget _buildIapPlaceholderCard() {
-    return const Container(
+    return Container(
       padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
       decoration: BoxDecoration(
         color: BrutalistTheme.grey,
