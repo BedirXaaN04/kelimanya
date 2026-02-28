@@ -25,8 +25,8 @@ class CrosswordGenerator {
       for (int i = 0; i < word.length; i++) {
         int cx = x + i;
         int cy = y;
-        if (grid.containsKey('$cx_$cy')) {
-          if (grid['$cx_$cy'] != word[i]) return false;
+        if (grid.containsKey('${cx}_$cy')) {
+          if (grid['${cx}_$cy'] != word[i]) return false;
         } else {
           if (grid.containsKey('${cx}_${cy - 1}') || grid.containsKey('${cx}_${cy + 1}')) return false;
         }
@@ -37,8 +37,8 @@ class CrosswordGenerator {
       for (int i = 0; i < word.length; i++) {
         int cx = x;
         int cy = y + i;
-        if (grid.containsKey('$cx_$cy')) {
-          if (grid['$cx_$cy'] != word[i]) return false;
+        if (grid.containsKey('${cx}_$cy')) {
+          if (grid['${cx}_$cy'] != word[i]) return false;
         } else {
           if (grid.containsKey('${cx - 1}_$cy') || grid.containsKey('${cx + 1}_$cy')) return false;
         }
