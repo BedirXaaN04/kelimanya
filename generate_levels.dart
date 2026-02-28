@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print, curly_braces_in_flow_control_structures
 import 'dart:io';
 
 class CrosswordGenerator {
@@ -14,32 +15,32 @@ class CrosswordGenerator {
     wordPositions.add({'word': word, 'x': 0, 'y': 0, 'direction': 'H'});
     placedWords.add(word);
     for (int i = 0; i < word.length; i++) {
-      grid['$i\_0'] = word[i];
+      grid['$i_0'] = word[i];
     }
   }
 
   bool canPlace(String word, int x, int y, String direction) {
     if (direction == 'H') {
-      if (grid.containsKey('${x - 1}\_$y') || grid.containsKey('${x + word.length}\_$y')) return false;
+      if (grid.containsKey('${x - 1}_$y') || grid.containsKey('${x + word.length}_$y')) return false;
       for (int i = 0; i < word.length; i++) {
         int cx = x + i;
         int cy = y;
-        if (grid.containsKey('${cx}\_${cy}')) {
-          if (grid['${cx}\_${cy}'] != word[i]) return false;
+        if (grid.containsKey('$cx_$cy')) {
+          if (grid['$cx_$cy'] != word[i]) return false;
         } else {
-          if (grid.containsKey('${cx}\_${cy - 1}') || grid.containsKey('${cx}\_${cy + 1}')) return false;
+          if (grid.containsKey('$cx_${cy - 1}') || grid.containsKey('$cx_${cy + 1}')) return false;
         }
       }
       return true;
     } else {
-      if (grid.containsKey('${x}\_${y - 1}') || grid.containsKey('${x}\_${y + word.length}')) return false;
+      if (grid.containsKey('$x_${y - 1}') || grid.containsKey('$x_${y + word.length}')) return false;
       for (int i = 0; i < word.length; i++) {
         int cx = x;
         int cy = y + i;
-        if (grid.containsKey('${cx}\_${cy}')) {
-          if (grid['${cx}\_${cy}'] != word[i]) return false;
+        if (grid.containsKey('$cx_$cy')) {
+          if (grid['$cx_$cy'] != word[i]) return false;
         } else {
-          if (grid.containsKey('${cx - 1}\_${cy}') || grid.containsKey('${cx + 1}\_${cy}')) return false;
+          if (grid.containsKey('${cx - 1}_$cy') || grid.containsKey('${cx + 1}_$cy')) return false;
         }
       }
       return true;
@@ -50,9 +51,9 @@ class CrosswordGenerator {
     wordPositions.add({'word': word, 'x': x, 'y': y, 'direction': direction});
     placedWords.add(word);
     if (direction == 'H') {
-      for (int i = 0; i < word.length; i++) grid['${x + i}\_$y'] = word[i];
+      for (int i = 0; i < word.length; i++) grid['${x + i}_$y'] = word[i];
     } else {
-      for (int i = 0; i < word.length; i++) grid['${x}\_${y + i}'] = word[i];
+      for (int i = 0; i < word.length; i++) grid['$x_${y + i}'] = word[i];
     }
   }
 

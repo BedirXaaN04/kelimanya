@@ -29,7 +29,7 @@ class AuthService {
   static Future<({bool success, String message})> signInWithEmail(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      return (success: true, message: '✓ Hoş geldin, ${displayName}!');
+      return (success: true, message: '✓ Hoş geldin, $displayName!');
     } on FirebaseAuthException catch (e) {
       return (success: false, message: '✗ ${_translateError(e.code)}');
     } catch (e) {
@@ -69,7 +69,7 @@ class AuthService {
         );
         await _auth.signInWithCredential(credential);
       }
-      return (success: true, message: '✓ Hoş geldin, ${displayName}!');
+      return (success: true, message: '✓ Hoş geldin, $displayName!');
     } catch (e) {
       debugPrint('Google Sign-In error: $e');
       return (success: false, message: '✗ Google girişi başarısız.');

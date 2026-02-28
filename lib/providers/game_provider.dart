@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import '../models/level_model.dart';
 import '../models/theme_model.dart';
 import '../services/ad_service.dart';
@@ -101,7 +102,7 @@ class GameProvider extends ChangeNotifier {
         for (int i = 0; i < w.word.length; i++) {
           int cx = w.x + (w.direction == 'H' ? i : 0);
           int cy = w.y + (w.direction == 'V' ? i : 0);
-          String c = "${cx}_${cy}";
+          String c = "$cx_$cy";
           if (!allCoords.contains(c)) {
             allCoords.add(c);
           }
@@ -223,7 +224,7 @@ class GameProvider extends ChangeNotifier {
             for (int i = 0; i < target.word.length; i++) {
               int cx = target.x + (target.direction == 'H' ? i : 0);
               int cy = target.y + (target.direction == 'V' ? i : 0);
-              if ("${cx}_${cy}" == surpriseTileCoordinate) {
+              if ("$cx_$cy" == surpriseTileCoordinate) {
                 isSurpriseFound = true;
                 totalCoins += 10;
                 showToast('💎 Sürpriz Bulundu! +10 🪙');

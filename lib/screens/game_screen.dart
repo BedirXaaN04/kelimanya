@@ -114,6 +114,7 @@ class _GameScreenState extends State<GameScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (provider.isLevelCompleted() && provider.foundWords.isNotEmpty && !_winModalShown) {
         Future.delayed(const Duration(milliseconds: 700), () {
+          if (!context.mounted) return;
           if (mounted) _showWinModal(context, provider);
         });
       }
@@ -443,9 +444,8 @@ class _GameScreenState extends State<GameScreen> {
       onTap: () {
         AdService().showRewardedAd(
           onRewardEarned: () {
-            provider.totalCoins += 50;
+            provider.claimReward(50);
             provider.showToast("🎁 +50 🪙 Şahane!");
-            provider.notifyListeners();
           },
         );
       },

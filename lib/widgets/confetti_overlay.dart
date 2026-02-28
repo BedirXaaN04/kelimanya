@@ -5,7 +5,7 @@ class ConfettiOverlay extends StatefulWidget {
   final bool show;
   final VoidCallback? onComplete;
 
-  const ConfettiOverlay({Key? key, required this.show, this.onComplete}) : super(key: key);
+  const ConfettiOverlay({super.key, required this.show, this.onComplete});
 
   @override
   State<ConfettiOverlay> createState() => _ConfettiOverlayState();

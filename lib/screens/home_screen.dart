@@ -8,7 +8,7 @@ import 'game_screen.dart';
 import '../widgets/market_modal.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   void _showModal(BuildContext context, String title, Widget content) {
     showDialog(

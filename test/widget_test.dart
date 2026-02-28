@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print, curly_braces_in_flow_control_structures
 // This is a basic Flutter widget test.
 //
 // To perform an interaction with a widget in your test, use the WidgetTester

@@ -6,7 +6,7 @@ import '../theme/brutalist_theme.dart';
 
 class InteractiveWheel extends StatefulWidget {
   final List<String> letters;
-  const InteractiveWheel({Key? key, required this.letters}) : super(key: key);
+  const InteractiveWheel({super.key, required this.letters});
 
   @override
   State<InteractiveWheel> createState() => _InteractiveWheelState();
@@ -15,7 +15,7 @@ class InteractiveWheel extends StatefulWidget {
 class _InteractiveWheelState extends State<InteractiveWheel> {
   final GlobalKey _wheelKey = GlobalKey();
   List<Offset> _letterPositions = [];
-  List<int> _selectedIndices = [];
+  final List<int> _selectedIndices = [];
   Offset? _currentDragPos;
   bool _isDrawing = false;
   bool _showPreview = false;

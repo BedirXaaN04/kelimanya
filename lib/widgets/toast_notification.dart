@@ -4,7 +4,7 @@ import '../theme/brutalist_theme.dart';
 class ToastNotification extends StatelessWidget {
   final String? message;
 
-  const ToastNotification({Key? key, this.message}) : super(key: key);
+  const ToastNotification({super.key, this.message});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import '../providers/game_provider.dart';
 import '../theme/brutalist_theme.dart';
 
 class MarketScreen extends StatelessWidget {
-  const MarketScreen({Key? key}) : super(key: key);
+  const MarketScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +125,7 @@ class MarketScreen extends StatelessWidget {
   }
 
   Widget _buildAvatarGrid(BuildContext context, GameProvider provider) {
-    return Container(
+    return const Container(
       padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
       decoration: BoxDecoration(
         color: BrutalistTheme.grey,
@@ -165,7 +165,7 @@ class MarketScreen extends StatelessWidget {
   }
   
   Widget _buildIapPlaceholderCard() {
-    return Container(
+    return const Container(
       padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
       decoration: BoxDecoration(
         color: BrutalistTheme.grey,

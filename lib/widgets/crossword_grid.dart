@@ -5,7 +5,7 @@ import '../providers/game_provider.dart';
 import 'letter_box.dart';
 
 class CrosswordGrid extends StatelessWidget {
-  const CrosswordGrid({Key? key}) : super(key: key);
+  const CrosswordGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +90,7 @@ class CrosswordGrid extends StatelessWidget {
                         letter: cell['letter'],
                         isFound: cell['isFound'],
                         isHinted: cell['isHinted'] ?? false,
-                        isSurpriseTile: provider.surpriseTileCoordinate == "${cx}_${cy}" && !provider.isSurpriseFound,
+                        isSurpriseTile: provider.surpriseTileCoordinate == "$cx_$cy" && !provider.isSurpriseFound,
                       ),
                     );
                   }).toList(),

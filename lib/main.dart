@@ -36,7 +36,7 @@ void main() async {
 }
 
 class KelimanyaApp extends StatelessWidget {
-  const KelimanyaApp({Key? key}) : super(key: key);
+  const KelimanyaApp({super.key});
 
   @override
   Widget build(BuildContext context) {

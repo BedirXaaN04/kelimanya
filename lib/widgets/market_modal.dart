@@ -5,7 +5,7 @@ import '../theme/brutalist_theme.dart';
 import '../models/theme_model.dart';
 
 class MarketModalContent extends StatelessWidget {
-  const MarketModalContent({Key? key}) : super(key: key);
+  const MarketModalContent({super.key});
 
   @override
   Widget build(BuildContext context) {
