@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'dart:async';
 import 'dart:math';
 import '../models/level_model.dart';
 import '../models/theme_model.dart';
@@ -64,10 +63,7 @@ class GameProvider extends ChangeNotifier {
     consecutiveWrongGuesses = 0;
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
+
 
   Future<void> _loadData() async {
     final prefs = await SharedPreferences.getInstance();
