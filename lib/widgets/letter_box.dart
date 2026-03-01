@@ -33,8 +33,7 @@ class LetterBox extends StatelessWidget {
         color: bgColor,
         borderRadius: BorderRadius.circular(8.0),
         border: Border.all(
-          color: BrutalistTheme.black,
-          width: 3.0,
+          color: BrutalistTheme.black, width: BrutalistTheme.borderWidth,
           // Flutter doesn't support dashed borders out of the box easily, falling back to solid
         ),
         boxShadow: const [

@@ -1,4 +1,4 @@
-﻿class WordPosition {
+class WordPosition {
   final String word;
   final int x;
   final int y;
@@ -62,27 +62,27 @@ final List<LevelModel> gameLevels = [
   ),
   // Level 5
   LevelModel(
-    id: 5, letters: ["K", "Ä°", "T", "A", "P"],
-    words: [WordPosition(word: "KÄ°TAP", x: 4, y: 4, direction: "H"), WordPosition(word: "PATÄ°K", x: 4, y: 0, direction: "V"), WordPosition(word: "Ä°PTAL", x: 5, y: 4, direction: "V"), WordPosition(word: "KATÄ°P", x: 7, y: 3, direction: "V"), WordPosition(word: "TAKÄ°P", x: 0, y: 0, direction: "H"), WordPosition(word: "PAKET", x: 0, y: 2, direction: "H")],
-    extras: ["PÄ°L", "TÄ°P", "KÄ°T", "PÄ°K", "KAT", "PAK", "AÄ°T"],
+    id: 5, letters: ["K", "İ", "T", "A", "P"],
+    words: [WordPosition(word: "KİTAP", x: 4, y: 4, direction: "H"), WordPosition(word: "PATİK", x: 4, y: 0, direction: "V"), WordPosition(word: "İPTAL", x: 5, y: 4, direction: "V"), WordPosition(word: "KATİP", x: 7, y: 3, direction: "V"), WordPosition(word: "TAKİP", x: 0, y: 0, direction: "H"), WordPosition(word: "PAKET", x: 0, y: 2, direction: "H")],
+    extras: ["PİL", "TİP", "KİT", "PİK", "KAT", "PAK", "AİT"],
   ),
   // Level 6
   LevelModel(
-    id: 6, letters: ["G", "Ãœ", "N", "E", "Å"],
-    words: [WordPosition(word: "GÃœNEÅ", x: 0, y: 2, direction: "H"), WordPosition(word: "GÃœMÃœÅ", x: 0, y: 2, direction: "V"), WordPosition(word: "GÃœNE", x: 2, y: 0, direction: "V"), WordPosition(word: "GEN", x: 2, y: 0, direction: "H"), WordPosition(word: "ÅEN", x: 4, y: 2, direction: "V")],
-    extras: ["GÃœN", "ÅEY", "GÃœR", "ÃœN", "NE", "EÅ"],
+    id: 6, letters: ["G", "Ü", "N", "E", "Ş"],
+    words: [WordPosition(word: "GÜNEŞ", x: 0, y: 2, direction: "H"), WordPosition(word: "GÜMÜŞ", x: 0, y: 2, direction: "V"), WordPosition(word: "GÜNE", x: 2, y: 0, direction: "V"), WordPosition(word: "GEN", x: 2, y: 0, direction: "H"), WordPosition(word: "ŞEN", x: 4, y: 2, direction: "V")],
+    extras: ["GÜN", "ŞEY", "GÜR", "ÜN", "NE", "EŞ"],
   ),
   // Level 7
   LevelModel(
-    id: 7, letters: ["D", "E", "N", "Ä°", "Z"],
-    words: [WordPosition(word: "DENÄ°Z", x: 2, y: 3, direction: "H"), WordPosition(word: "ZÄ°NDE", x: 2, y: 0, direction: "V"), WordPosition(word: "DÄ°ZGÄ°", x: 5, y: 2, direction: "V"), WordPosition(word: "DÄ°Z", x: 0, y: 0, direction: "H"), WordPosition(word: "DÄ°N", x: 0, y: 2, direction: "H")],
-    extras: ["ZÄ°L", "ZOR", "NED", "ZÄ°G", "Ä°N", "Ä°Z"],
+    id: 7, letters: ["D", "E", "N", "İ", "Z"],
+    words: [WordPosition(word: "DENİZ", x: 2, y: 3, direction: "H"), WordPosition(word: "ZİNDE", x: 2, y: 0, direction: "V"), WordPosition(word: "DİZGİ", x: 5, y: 2, direction: "V"), WordPosition(word: "DİZ", x: 0, y: 0, direction: "H"), WordPosition(word: "DİN", x: 0, y: 2, direction: "H")],
+    extras: ["ZİL", "ZOR", "NED", "ZİG", "İN", "İZ"],
   ),
   // Level 8
   LevelModel(
-    id: 8, letters: ["Ã‡", "Ä°", "Ã‡", "E", "K"],
-    words: [WordPosition(word: "Ã‡Ä°Ã‡EK", x: 1, y: 3, direction: "H"), WordPosition(word: "KEÃ‡Ä°", x: 1, y: 1, direction: "V"), WordPosition(word: "Ã‡EKÄ°", x: 3, y: 3, direction: "V"), WordPosition(word: "Ã‡EKE", x: 4, y: 0, direction: "V"), WordPosition(word: "Ä°Ã‡", x: 3, y: 6, direction: "H"), WordPosition(word: "EK", x: 0, y: 1, direction: "H"), WordPosition(word: "KÄ°", x: 5, y: 3, direction: "V")],
-    extras: ["Ã‡EK", "KÄ°Ã‡", "Ã‡Ä°Ä", "Ã‡Ä°L"],
+    id: 8, letters: ["Ç", "İ", "Ç", "E", "K"],
+    words: [WordPosition(word: "ÇİÇEK", x: 1, y: 3, direction: "H"), WordPosition(word: "KEÇİ", x: 1, y: 1, direction: "V"), WordPosition(word: "ÇEKİ", x: 3, y: 3, direction: "V"), WordPosition(word: "ÇEKE", x: 4, y: 0, direction: "V"), WordPosition(word: "İÇ", x: 3, y: 6, direction: "H"), WordPosition(word: "EK", x: 0, y: 1, direction: "H"), WordPosition(word: "Kİ", x: 5, y: 3, direction: "V")],
+    extras: ["ÇEK", "KİÇ", "ÇİĞ", "ÇİL"],
   ),
   // Level 9
   LevelModel(
@@ -92,15 +92,15 @@ final List<LevelModel> gameLevels = [
   ),
   // Level 10
   LevelModel(
-    id: 10, letters: ["S", "E", "V", "G", "Ä°"],
-    words: [WordPosition(word: "SEVGÄ°", x: 2, y: 2, direction: "H"), WordPosition(word: "VERGÄ°", x: 3, y: 1, direction: "V"), WordPosition(word: "EVGÄ°", x: 5, y: 0, direction: "V"), WordPosition(word: "SERÄ°", x: 0, y: 5, direction: "H"), WordPosition(word: "EVSÄ°", x: 5, y: 0, direction: "H"), WordPosition(word: "SEV", x: 0, y: 5, direction: "V")],
-    extras: ["GÄ°Z", "GÄ°R", "SÄ°G", "GEZ", "SÄ°S"],
+    id: 10, letters: ["S", "E", "V", "G", "İ"],
+    words: [WordPosition(word: "SEVGİ", x: 2, y: 2, direction: "H"), WordPosition(word: "VERGİ", x: 3, y: 1, direction: "V"), WordPosition(word: "EVGİ", x: 5, y: 0, direction: "V"), WordPosition(word: "SERİ", x: 0, y: 5, direction: "H"), WordPosition(word: "EVSİ", x: 5, y: 0, direction: "H"), WordPosition(word: "SEV", x: 0, y: 5, direction: "V")],
+    extras: ["GİZ", "GİR", "SİG", "GEZ", "SİS"],
   ),
   // Level 11
   LevelModel(
-    id: 11, letters: ["D", "Ãœ", "N", "Y", "A"],
-    words: [WordPosition(word: "DÃœNYA", x: 0, y: 4, direction: "H"), WordPosition(word: "AYDIN", x: 0, y: 2, direction: "V"), WordPosition(word: "DAYAN", x: 2, y: 0, direction: "V"), WordPosition(word: "YÃœN", x: 3, y: 4, direction: "V"), WordPosition(word: "YAD", x: 0, y: 0, direction: "H")],
-    extras: ["YÃœN", "DÃœN", "YAN", "AY", "YA", "AN"],
+    id: 11, letters: ["D", "Ü", "N", "Y", "A"],
+    words: [WordPosition(word: "DÜNYA", x: 0, y: 4, direction: "H"), WordPosition(word: "AYDIN", x: 0, y: 2, direction: "V"), WordPosition(word: "DAYAN", x: 2, y: 0, direction: "V"), WordPosition(word: "YÜN", x: 3, y: 4, direction: "V"), WordPosition(word: "YAD", x: 0, y: 0, direction: "H")],
+    extras: ["YÜN", "DÜN", "YAN", "AY", "YA", "AN"],
   ),
   // Level 12
   LevelModel(
@@ -110,9 +110,9 @@ final List<LevelModel> gameLevels = [
   ),
   // Level 13
   LevelModel(
-    id: 13, letters: ["S", "O", "N", "U", "Ã‡"],
-    words: [WordPosition(word: "SONUÃ‡", x: 0, y: 3, direction: "H"), WordPosition(word: "ONUR", x: 1, y: 3, direction: "V"), WordPosition(word: "SORU", x: 3, y: 0, direction: "V"), WordPosition(word: "SUÃ‡", x: 0, y: 5, direction: "H"), WordPosition(word: "SON", x: 3, y: 0, direction: "H")],
-    extras: ["UÃ‡", "ON", "US", "Ã‡OK", "SAÃ‡"],
+    id: 13, letters: ["S", "O", "N", "U", "Ç"],
+    words: [WordPosition(word: "SONUÇ", x: 0, y: 3, direction: "H"), WordPosition(word: "ONUR", x: 1, y: 3, direction: "V"), WordPosition(word: "SORU", x: 3, y: 0, direction: "V"), WordPosition(word: "SUÇ", x: 0, y: 5, direction: "H"), WordPosition(word: "SON", x: 3, y: 0, direction: "H")],
+    extras: ["UÇ", "ON", "US", "ÇOK", "SAÇ"],
   ),
   // Level 14
   LevelModel(
@@ -122,21 +122,21 @@ final List<LevelModel> gameLevels = [
   ),
   // Level 15
   LevelModel(
-    id: 15, letters: ["G", "Ã–", "Z", "E", "L"],
-    words: [WordPosition(word: "GÃ–ZEL", x: 2, y: 2, direction: "H"), WordPosition(word: "GÃ–ZLÃœ", x: 2, y: 2, direction: "V"), WordPosition(word: "Ã–ZEL", x: 4, y: 1, direction: "V"), WordPosition(word: "GÃ–LE", x: 6, y: 0, direction: "V"), WordPosition(word: "GÃ–Z", x: 0, y: 4, direction: "H"), WordPosition(word: "Ã–ZE", x: 6, y: 1, direction: "H")],
-    extras: ["Ã–Z", "GEL", "ZÄ°L", "ZOR"],
+    id: 15, letters: ["G", "Ö", "Z", "E", "L"],
+    words: [WordPosition(word: "GÖZEL", x: 2, y: 2, direction: "H"), WordPosition(word: "GÖZLÜ", x: 2, y: 2, direction: "V"), WordPosition(word: "ÖZEL", x: 4, y: 1, direction: "V"), WordPosition(word: "GÖLE", x: 6, y: 0, direction: "V"), WordPosition(word: "GÖZ", x: 0, y: 4, direction: "H"), WordPosition(word: "ÖZE", x: 6, y: 1, direction: "H")],
+    extras: ["ÖZ", "GEL", "ZİL", "ZOR"],
   ),
   // Level 16
   LevelModel(
-    id: 16, letters: ["R", "E", "S", "Ä°", "M"],
-    words: [WordPosition(word: "RESÄ°M", x: 3, y: 3, direction: "H"), WordPosition(word: "ESÄ°R", x: 3, y: 0, direction: "V"), WordPosition(word: "REÄ°S", x: 5, y: 0, direction: "V"), WordPosition(word: "MÄ°RS", x: 7, y: 3, direction: "V"), WordPosition(word: "SERÄ°", x: 0, y: 2, direction: "H"), WordPosition(word: "MÄ°DE", x: 0, y: 0, direction: "H")],
-    extras: ["SÄ°M", "MÄ°R", "MÄ°S", "Ä°RS", "SER", "REM"],
+    id: 16, letters: ["R", "E", "S", "İ", "M"],
+    words: [WordPosition(word: "RESİM", x: 3, y: 3, direction: "H"), WordPosition(word: "ESİR", x: 3, y: 0, direction: "V"), WordPosition(word: "REİS", x: 5, y: 0, direction: "V"), WordPosition(word: "MİRS", x: 7, y: 3, direction: "V"), WordPosition(word: "SERİ", x: 0, y: 2, direction: "H"), WordPosition(word: "MİDE", x: 0, y: 0, direction: "H")],
+    extras: ["SİM", "MİR", "MİS", "İRS", "SER", "REM"],
   ),
   // Level 17
   LevelModel(
     id: 17, letters: ["Y", "I", "L", "D", "I", "Z"],
-    words: [WordPosition(word: "YILDIZ", x: 2, y: 2, direction: "H"), WordPosition(word: "YILLIK", x: 2, y: 2, direction: "V"), WordPosition(word: "YILIÅ", x: 4, y: 0, direction: "V"), WordPosition(word: "YILI", x: 6, y: 1, direction: "V"), WordPosition(word: "DIÅ", x: 1, y: 6, direction: "H"), WordPosition(word: "YIL", x: 0, y: 4, direction: "H")],
-    extras: ["ZIT", "ZÄ°L", "ZAR", "ZOR", "ZIH"],
+    words: [WordPosition(word: "YILDIZ", x: 2, y: 2, direction: "H"), WordPosition(word: "YILLIK", x: 2, y: 2, direction: "V"), WordPosition(word: "YILIŞ", x: 4, y: 0, direction: "V"), WordPosition(word: "YILI", x: 6, y: 1, direction: "V"), WordPosition(word: "DIŞ", x: 1, y: 6, direction: "H"), WordPosition(word: "YIL", x: 0, y: 4, direction: "H")],
+    extras: ["ZIT", "ZİL", "ZAR", "ZOR", "ZIH"],
   ),
   // Level 18
   LevelModel(
@@ -147,20 +147,20 @@ final List<LevelModel> gameLevels = [
   // Level 19
   LevelModel(
     id: 19, letters: ["T", "O", "P", "R", "A", "K"],
-    words: [WordPosition(word: "TOPRAK", x: 0, y: 2, direction: "H"), WordPosition(word: "KOPAR", x: 1, y: 1, direction: "V"), WordPosition(word: "ORTAK", x: 3, y: 1, direction: "V"), WordPosition(word: "AKKOR", x: 5, y: 1, direction: "V"), WordPosition(word: "KROKÄ°", x: 5, y: 3, direction: "H"), WordPosition(word: "PARK", x: 8, y: 0, direction: "V")],
+    words: [WordPosition(word: "TOPRAK", x: 0, y: 2, direction: "H"), WordPosition(word: "KOPAR", x: 1, y: 1, direction: "V"), WordPosition(word: "ORTAK", x: 3, y: 1, direction: "V"), WordPosition(word: "AKKOR", x: 5, y: 1, direction: "V"), WordPosition(word: "KROKİ", x: 5, y: 3, direction: "H"), WordPosition(word: "PARK", x: 8, y: 0, direction: "V")],
     extras: ["POT", "ROT", "KOP", "KART", "KAR", "KOT"],
   ),
   // Level 20
   LevelModel(
-    id: 20, letters: ["Å", "A", "H", "A", "N", "E"],
-    words: [WordPosition(word: "ÅAHANE", x: 1, y: 3, direction: "H"), WordPosition(word: "HAÅÄ°N", x: 1, y: 1, direction: "V"), WordPosition(word: "AÅÄ°NA", x: 4, y: 3, direction: "V"), WordPosition(word: "HANE", x: 6, y: 0, direction: "V"), WordPosition(word: "AHA", x: 0, y: 1, direction: "H"), WordPosition(word: "ÅAH", x: 3, y: 7, direction: "H"), WordPosition(word: "ANA", x: 0, y: 5, direction: "H")],
-    extras: ["HAN", "NAAÅ", "ÅAN", "HAÅ", "AÅ"],
+    id: 20, letters: ["Ş", "A", "H", "A", "N", "E"],
+    words: [WordPosition(word: "ŞAHANE", x: 1, y: 3, direction: "H"), WordPosition(word: "HAŞİN", x: 1, y: 1, direction: "V"), WordPosition(word: "AŞİNA", x: 4, y: 3, direction: "V"), WordPosition(word: "HANE", x: 6, y: 0, direction: "V"), WordPosition(word: "AHA", x: 0, y: 1, direction: "H"), WordPosition(word: "ŞAH", x: 3, y: 7, direction: "H"), WordPosition(word: "ANA", x: 0, y: 5, direction: "H")],
+    extras: ["HAN", "NAAŞ", "ŞAN", "HAŞ", "AŞ"],
   ),
   // Level 21
   LevelModel(
-    id: 21, letters: ["B", "Ä°", "L", "G", "Ä°"],
-    words: [WordPosition(word: "BÄ°LGÄ°", x: 0, y: 0, direction: "H"), WordPosition(word: "BÄ°L", x: 0, y: 0, direction: "V")],
-    extras: ["Ä°L", "LÄ°G"],
+    id: 21, letters: ["B", "İ", "L", "G", "İ"],
+    words: [WordPosition(word: "BİLGİ", x: 0, y: 0, direction: "H"), WordPosition(word: "BİL", x: 0, y: 0, direction: "V")],
+    extras: ["İL", "LİG"],
   ),
   // Level 22
   LevelModel(
@@ -194,14 +194,14 @@ final List<LevelModel> gameLevels = [
   ),
   // Level 27
   LevelModel(
-    id: 27, letters: ["Ã‡", "Ä°", "Ã‡", "E", "K"],
-    words: [WordPosition(word: "Ã‡Ä°Ã‡EK", x: 0, y: 0, direction: "H"), WordPosition(word: "Ã‡EK", x: 2, y: 0, direction: "V")],
-    extras: ["Ä°Ã‡", "EK"],
+    id: 27, letters: ["Ç", "İ", "Ç", "E", "K"],
+    words: [WordPosition(word: "ÇİÇEK", x: 0, y: 0, direction: "H"), WordPosition(word: "ÇEK", x: 2, y: 0, direction: "V")],
+    extras: ["İÇ", "EK"],
   ),
   // Level 28
   LevelModel(
-    id: 28, letters: ["B", "Ã–", "C", "E", "K"],
-    words: [WordPosition(word: "BÃ–CEK", x: 0, y: 0, direction: "H"), WordPosition(word: "CEK", x: 2, y: 0, direction: "V")],
+    id: 28, letters: ["B", "Ö", "C", "E", "K"],
+    words: [WordPosition(word: "BÖCEK", x: 0, y: 0, direction: "H"), WordPosition(word: "CEK", x: 2, y: 0, direction: "V")],
     extras: ["EK", "BEK"],
   ),
   // Level 29
@@ -212,15 +212,15 @@ final List<LevelModel> gameLevels = [
   ),
   // Level 30
   LevelModel(
-    id: 30, letters: ["G", "E", "M", "Ä°"],
-    words: [WordPosition(word: "GEMÄ°", x: 0, y: 0, direction: "H"), WordPosition(word: "GEM", x: 0, y: 0, direction: "V")],
-    extras: ["MÄ°", "ME"],
+    id: 30, letters: ["G", "E", "M", "İ"],
+    words: [WordPosition(word: "GEMİ", x: 0, y: 0, direction: "H"), WordPosition(word: "GEM", x: 0, y: 0, direction: "V")],
+    extras: ["Mİ", "ME"],
   ),
   // Level 31
   LevelModel(
-    id: 31, letters: ["U", "Ã‡", "A", "K"],
-    words: [WordPosition(word: "UÃ‡AK", x: 0, y: 0, direction: "H"), WordPosition(word: "UÃ‡", x: 0, y: 0, direction: "V")],
-    extras: ["AÃ‡", "AK", "KAÃ‡"],
+    id: 31, letters: ["U", "Ç", "A", "K"],
+    words: [WordPosition(word: "UÇAK", x: 0, y: 0, direction: "H"), WordPosition(word: "UÇ", x: 0, y: 0, direction: "V")],
+    extras: ["AÇ", "AK", "KAÇ"],
   ),
   // Level 32
   LevelModel(
@@ -230,8 +230,8 @@ final List<LevelModel> gameLevels = [
   ),
   // Level 33
   LevelModel(
-    id: 33, letters: ["K", "Ã–", "P", "E", "K"],
-    words: [WordPosition(word: "KÃ–PEK", x: 0, y: 0, direction: "H"), WordPosition(word: "PEK", x: 2, y: 0, direction: "V")],
+    id: 33, letters: ["K", "Ö", "P", "E", "K"],
+    words: [WordPosition(word: "KÖPEK", x: 0, y: 0, direction: "H"), WordPosition(word: "PEK", x: 2, y: 0, direction: "V")],
     extras: ["EK", "KEP"],
   ),
   // Level 34
@@ -266,9 +266,9 @@ final List<LevelModel> gameLevels = [
   ),
   // Level 39
   LevelModel(
-    id: 39, letters: ["A", "T", "E", "Å"],
-    words: [WordPosition(word: "ATEÅ", x: 0, y: 0, direction: "H"), WordPosition(word: "AT", x: 0, y: 0, direction: "V")],
-    extras: ["EÅ", "TAÅ", "AÅ"],
+    id: 39, letters: ["A", "T", "E", "Ş"],
+    words: [WordPosition(word: "ATEŞ", x: 0, y: 0, direction: "H"), WordPosition(word: "AT", x: 0, y: 0, direction: "V")],
+    extras: ["EŞ", "TAŞ", "AŞ"],
   ),
   // Level 40
   LevelModel(
@@ -284,21 +284,21 @@ final List<LevelModel> gameLevels = [
   ),
   // Level 42
   LevelModel(
-    id: 42, letters: ["D", "O", "Ä", "A"],
-    words: [WordPosition(word: "DOÄA", x: 0, y: 0, direction: "H"), WordPosition(word: "DAÄ", x: 0, y: 0, direction: "V")],
-    extras: ["AÄ", "OD"],
+    id: 42, letters: ["D", "O", "Ğ", "A"],
+    words: [WordPosition(word: "DOĞA", x: 0, y: 0, direction: "H"), WordPosition(word: "DAĞ", x: 0, y: 0, direction: "V")],
+    extras: ["AĞ", "OD"],
   ),
   // Level 43
   LevelModel(
-    id: 43, letters: ["D", "E", "N", "Ä°", "Z"],
-    words: [WordPosition(word: "DENÄ°Z", x: 0, y: 0, direction: "H"), WordPosition(word: "DÄ°N", x: 0, y: 0, direction: "V")],
-    extras: ["EN", "NE", "Ä°Z", "DÄ°Z"],
+    id: 43, letters: ["D", "E", "N", "İ", "Z"],
+    words: [WordPosition(word: "DENİZ", x: 0, y: 0, direction: "H"), WordPosition(word: "DİN", x: 0, y: 0, direction: "V")],
+    extras: ["EN", "NE", "İZ", "DİZ"],
   ),
   // Level 44
   LevelModel(
-    id: 44, letters: ["Å", "E", "H", "Ä°", "R"],
-    words: [WordPosition(word: "ÅEHÄ°R", x: 0, y: 0, direction: "H"), WordPosition(word: "ÅER", x: 0, y: 0, direction: "V")],
-    extras: ["EÅ", "RE", "HER"],
+    id: 44, letters: ["Ş", "E", "H", "İ", "R"],
+    words: [WordPosition(word: "ŞEHİR", x: 0, y: 0, direction: "H"), WordPosition(word: "ŞER", x: 0, y: 0, direction: "V")],
+    extras: ["EŞ", "RE", "HER"],
   ),
   // Level 45
   LevelModel(
@@ -308,9 +308,9 @@ final List<LevelModel> gameLevels = [
   ),
   // Level 46
   LevelModel(
-    id: 46, letters: ["Y", "A", "Ä", "I", "Å"],
-    words: [WordPosition(word: "YAÄIÅ", x: 0, y: 0, direction: "H"), WordPosition(word: "YAÄ", x: 0, y: 0, direction: "V")],
-    extras: ["AY", "AÅ", "ÅA"],
+    id: 46, letters: ["Y", "A", "Ğ", "I", "Ş"],
+    words: [WordPosition(word: "YAĞIŞ", x: 0, y: 0, direction: "H"), WordPosition(word: "YAĞ", x: 0, y: 0, direction: "V")],
+    extras: ["AY", "AŞ", "ŞA"],
   ),
   // Level 47
   LevelModel(
@@ -326,25 +326,25 @@ final List<LevelModel> gameLevels = [
   ),
   // Level 49
   LevelModel(
-    id: 49, letters: ["G", "Ã–", "K", "Y", "Ãœ", "Z", "Ãœ"],
-    words: [WordPosition(word: "GÃ–KYÃœZÃœ", x: 0, y: 0, direction: "H"), WordPosition(word: "GÃ–Z", x: 0, y: 0, direction: "V")],
-    extras: ["Ã–K", "YÃœZ", "KÃ–Y"],
+    id: 49, letters: ["G", "Ö", "K", "Y", "Ü", "Z", "Ü"],
+    words: [WordPosition(word: "GÖKYÜZÜ", x: 0, y: 0, direction: "H"), WordPosition(word: "GÖZ", x: 0, y: 0, direction: "V")],
+    extras: ["ÖK", "YÜZ", "KÖY"],
   ),
   // Level 50
   LevelModel(
-    id: 50, letters: ["B", "Ä°", "L", "G", "E"],
-    words: [WordPosition(word: "BÄ°LGE", x: 0, y: 0, direction: "H"), WordPosition(word: "BÄ°L", x: 0, y: 0, direction: "V"), WordPosition(word: "GEL", x: 3, y: 0, direction: "V")],
-    extras: ["Ä°L", "BEL", "LÄ°G"],
+    id: 50, letters: ["B", "İ", "L", "G", "E"],
+    words: [WordPosition(word: "BİLGE", x: 0, y: 0, direction: "H"), WordPosition(word: "BİL", x: 0, y: 0, direction: "V"), WordPosition(word: "GEL", x: 3, y: 0, direction: "V")],
+    extras: ["İL", "BEL", "LİG"],
   ),
   // Level 51
   LevelModel(
-    id: 51, letters: ["P", "N", "Ä°", "S", "A"],
+    id: 51, letters: ["P", "N", "İ", "S", "A"],
     words: [
-      WordPosition(word: "NÄ°SAP", x: 0, y: 0, direction: "H"),
-      WordPosition(word: "NASÄ°P", x: 0, y: 0, direction: "V"),
-      WordPosition(word: "PÄ°S", x: 2, y: 2, direction: "H")
+      WordPosition(word: "NİSAP", x: 0, y: 0, direction: "H"),
+      WordPosition(word: "NASİP", x: 0, y: 0, direction: "V"),
+      WordPosition(word: "PİS", x: 2, y: 2, direction: "H")
     ],
-    extras: ["PAS", "SÄ°N", "ASÄ°", "ANÄ°", "Ä°SA", "PÄ°S"],
+    extras: ["PAS", "SİN", "ASİ", "ANİ", "İSA", "PİS"],
   ),
   // Level 52
   LevelModel(
@@ -358,13 +358,13 @@ final List<LevelModel> gameLevels = [
   ),
   // Level 53
   LevelModel(
-    id: 53, letters: ["Ãœ", "E", "R", "P", "S"],
+    id: 53, letters: ["Ü", "E", "R", "P", "S"],
     words: [
-      WordPosition(word: "SÃœPER", x: 0, y: 0, direction: "H"),
-      WordPosition(word: "SÃœRE", x: 0, y: 0, direction: "V"),
-      WordPosition(word: "PÃœRE", x: 2, y: 0, direction: "V")
+      WordPosition(word: "SÜPER", x: 0, y: 0, direction: "H"),
+      WordPosition(word: "SÜRE", x: 0, y: 0, direction: "V"),
+      WordPosition(word: "PÜRE", x: 2, y: 0, direction: "V")
     ],
-    extras: ["PRES", "PES", "SER", "ÃœS", "ER"],
+    extras: ["PRES", "PES", "SER", "ÜS", "ER"],
   ),
   // Level 54
   LevelModel(

@@ -40,7 +40,7 @@ class _GameScreenState extends State<GameScreen> {
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: BrutalistTheme.black, width: 5),
                 boxShadow: const [
-                  BoxShadow(color: BrutalistTheme.black, offset: Offset(6, 6)),
+                  BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset)),
                 ],
               ),
               child: Column(
@@ -52,7 +52,7 @@ class _GameScreenState extends State<GameScreen> {
                       fontSize: 36,
                       fontWeight: FontWeight.w900,
                       color: BrutalistTheme.white,
-                      shadows: [Shadow(color: BrutalistTheme.black, offset: Offset(3, 3))],
+                      shadows: [Shadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset))],
                     ),
                   ),
                   const SizedBox(height: 6),
@@ -66,9 +66,9 @@ class _GameScreenState extends State<GameScreen> {
                     decoration: BoxDecoration(
                       color: BrutalistTheme.white,
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: BrutalistTheme.black, width: 3),
+                      border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
                       boxShadow: const [
-                        BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4)),
+                        BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset)),
                       ],
                     ),
                     child: const Text("🪙 +50", style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
@@ -86,9 +86,9 @@ class _GameScreenState extends State<GameScreen> {
                       decoration: BoxDecoration(
                         color: BrutalistTheme.white,
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: BrutalistTheme.black, width: 3),
+                        border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
                         boxShadow: const [
-                          BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4)),
+                          BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset)),
                         ],
                       ),
                       child: const Center(
@@ -190,13 +190,13 @@ class _GameScreenState extends State<GameScreen> {
 
                   // ── BOTTOM ACTIONS ROW ──
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 10, left: 16, right: 16, top: 4),
+                    padding: const EdgeInsets.only(bottom: 10, left: 24, right: 24, top: 4),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         _buildBonusButton(provider),
-                        _buildUndoButton(),
+                        // Undo removed per Phase 11
                         _buildGiftButton(provider),
                       ],
                     ),
@@ -262,9 +262,9 @@ class _GameScreenState extends State<GameScreen> {
               decoration: BoxDecoration(
                 color: BrutalistTheme.white,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: BrutalistTheme.black, width: 3),
+                border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
                 boxShadow: const [
-                  BoxShadow(color: BrutalistTheme.black, offset: Offset(3, 3)),
+                  BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset)),
                 ],
               ),
               child: const Text("🏠", style: TextStyle(fontSize: 16)),
@@ -291,9 +291,9 @@ class _GameScreenState extends State<GameScreen> {
                   decoration: BoxDecoration(
                     color: BrutalistTheme.white,
                     borderRadius: BorderRadius.circular(50),
-                    border: Border.all(color: BrutalistTheme.black, width: 3),
+                    border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
                     boxShadow: const [
-                      BoxShadow(color: BrutalistTheme.black, offset: Offset(3, 3)),
+                      BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset)),
                     ],
                   ),
                   child: Text(
@@ -324,9 +324,9 @@ class _GameScreenState extends State<GameScreen> {
               decoration: BoxDecoration(
                 color: BrutalistTheme.accentYellow,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: BrutalistTheme.black, width: 3),
+                border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
                 boxShadow: const [
-                  BoxShadow(color: BrutalistTheme.black, offset: Offset(3, 3)),
+                  BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset)),
                 ],
               ),
               child: Text(
@@ -366,10 +366,10 @@ class _GameScreenState extends State<GameScreen> {
             height: 42,
             decoration: BoxDecoration(
               color: BrutalistTheme.white,
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: BrutalistTheme.black, width: 3),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
               boxShadow: const [
-                BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4)),
+                BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset)),
               ],
             ),
             child: Center(child: Text(icon, style: const TextStyle(fontSize: 16))),
@@ -383,7 +383,7 @@ class _GameScreenState extends State<GameScreen> {
             decoration: BoxDecoration(
               color: BrutalistTheme.accentRed,
               borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: BrutalistTheme.black, width: 2),
+              border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
             ),
             child: Text("$cost", style: const TextStyle(color: BrutalistTheme.white, fontSize: 8, fontWeight: FontWeight.w900)),
           ),
@@ -400,10 +400,10 @@ class _GameScreenState extends State<GameScreen> {
         height: 42,
         decoration: BoxDecoration(
           color: BrutalistTheme.white,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: BrutalistTheme.black, width: 3),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
           boxShadow: const [
-            BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4)),
+            BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset)),
           ],
         ),
         child: const Center(child: Text("🔀", style: TextStyle(fontSize: 16))),
@@ -412,23 +412,6 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   // ── BOTTOM ACTION HELPERS ──
-  Widget _buildUndoButton() {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
-        decoration: BoxDecoration(
-          color: BrutalistTheme.accentYellow,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: BrutalistTheme.black, width: 3),
-          boxShadow: const [
-            BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4)),
-          ],
-        ),
-        child: const Text("↩ GERİ AL", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900)),
-      ),
-    );
-  }
 
   Widget _buildBonusButton(GameProvider provider) {
     int count = provider.foundWords.where((w) => w.startsWith('_x')).length;
@@ -440,8 +423,8 @@ class _GameScreenState extends State<GameScreen> {
         decoration: BoxDecoration(
           color: BrutalistTheme.accentPurple,
           shape: BoxShape.circle,
-          border: Border.all(color: BrutalistTheme.black, width: 3),
-          boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(3, 3))],
+          border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
+          boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset))],
         ),
         child: Stack(
           alignment: Alignment.center,
@@ -478,9 +461,9 @@ class _GameScreenState extends State<GameScreen> {
         height: 50,
         decoration: BoxDecoration(
           color: BrutalistTheme.grey,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: BrutalistTheme.black, width: 3),
-          boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(3, 3))],
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
+          boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset))],
         ),
         child: const Center(
           child: Text("🎁\nİZLE", textAlign: TextAlign.center, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900, height: 1.1)),
@@ -507,9 +490,9 @@ class _GameScreenState extends State<GameScreen> {
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: BrutalistTheme.white,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: BrutalistTheme.black, width: 4),
-                boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(6, 6))],
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
+                boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset))],
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -529,7 +512,7 @@ class _GameScreenState extends State<GameScreen> {
                               decoration: BoxDecoration(
                                 color: BrutalistTheme.accentYellow,
                                 borderRadius: BorderRadius.circular(6),
-                                border: Border.all(color: BrutalistTheme.black, width: 2),
+                                border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
                               ),
                               child: Text(w, style: const TextStyle(fontWeight: FontWeight.w900)),
                             );
@@ -540,7 +523,7 @@ class _GameScreenState extends State<GameScreen> {
                     onTap: () => Navigator.of(context).pop(),
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      decoration: BoxDecoration(color: BrutalistTheme.accentRed, borderRadius: BorderRadius.circular(8), border: Border.all(color: BrutalistTheme.black, width: 3)),
+                      decoration: BoxDecoration(color: BrutalistTheme.accentRed, borderRadius: BorderRadius.circular(12), border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth)),
                       child: const Text("KAPAT", style: TextStyle(color: BrutalistTheme.white, fontWeight: FontWeight.w900)),
                     ),
                   )

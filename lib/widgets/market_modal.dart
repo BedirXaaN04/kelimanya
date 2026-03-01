@@ -31,7 +31,7 @@ class MarketModalContent extends StatelessWidget {
               boxShadow: const [
                 BoxShadow(
                   color: BrutalistTheme.black,
-                  offset: Offset(4, 4),
+                  offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset),
                 )
               ],
             ),
@@ -48,7 +48,7 @@ class MarketModalContent extends StatelessWidget {
                           gradient: LinearGradient(
                             colors: themeInfo.gradientColors,
                           ),
-                          border: Border.all(color: BrutalistTheme.black, width: 2),
+                          border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -98,7 +98,7 @@ class MarketModalContent extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
           color: BrutalistTheme.accentYellow,
-          border: Border.all(color: BrutalistTheme.black, width: 2),
+          border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
           borderRadius: BorderRadius.circular(4),
         ),
         child: const Text("AKTİF", style: TextStyle(fontWeight: FontWeight.bold)),
@@ -109,7 +109,7 @@ class MarketModalContent extends StatelessWidget {
       return ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: BrutalistTheme.white,
-          side: const BorderSide(color: BrutalistTheme.black, width: 2),
+          side: const BorderSide(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
           elevation: 0,
         ),
         onPressed: () {
@@ -122,7 +122,7 @@ class MarketModalContent extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: provider.totalCoins >= themeInfo.cost ? BrutalistTheme.accentGreen : Colors.grey.shade400,
-        side: const BorderSide(color: BrutalistTheme.black, width: 2),
+        side: const BorderSide(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
         elevation: 0,
       ),
       onPressed: () {

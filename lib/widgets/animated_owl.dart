@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import '../theme/brutalist_theme.dart';
 
 class AnimatedOwl extends StatefulWidget {
   final bool isAngry;
@@ -135,7 +136,7 @@ class _AnimatedOwlState extends State<AnimatedOwl> with TickerProviderStateMixin
                        borderRadius: BorderRadius.circular(55),
                        border: Border.all(color: Colors.black, width: stroke),
                        boxShadow: const [
-                         BoxShadow(color: Colors.black, offset: Offset(4, 4))
+                         BoxShadow(color: Colors.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset))
                        ]
                      ),
                      child: Stack(

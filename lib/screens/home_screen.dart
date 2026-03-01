@@ -60,9 +60,9 @@ class HomeScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: BrutalistTheme.accentRed,
                             shape: BoxShape.circle,
-                            border: Border.all(color: BrutalistTheme.black, width: 4),
+                            border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
                             boxShadow: const [
-                              BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4)),
+                              BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset)),
                             ],
                           ),
                           child: const Center(
@@ -240,9 +240,9 @@ class HomeScreen extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         color: BrutalistTheme.accentRed,
                                         borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(color: BrutalistTheme.black, width: 4),
+                                        border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
                                         boxShadow: const [
-                                          BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4)),
+                                          BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset)),
                                         ],
                                       ),
                                       child: Text(
@@ -370,10 +370,10 @@ class HomeScreen extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: bg,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: BrutalistTheme.black, width: 4),
+        borderRadius: BorderRadius.circular(BrutalistTheme.borderWidth > 3 ? 16 : 14),
+        border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
         boxShadow: const [
-          BoxShadow(color: BrutalistTheme.black, offset: Offset(6, 6)),
+          BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset)),
         ],
       ),
       child: child,
@@ -393,10 +393,10 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
           color: bg,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: BrutalistTheme.black, width: 4),
+          borderRadius: BorderRadius.circular(BrutalistTheme.borderWidth > 3 ? 16 : 10),
+          border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
           boxShadow: const [
-            BoxShadow(color: BrutalistTheme.black, offset: Offset(5, 5)),
+            BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset)),
           ],
         ),
         child: Center(
@@ -436,7 +436,7 @@ class HomeScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: const Color(0xFFDDDDDD),
                     borderRadius: BorderRadius.circular(7),
-                    border: Border.all(color: BrutalistTheme.black, width: 3),
+                    border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
                   ),
                   child: FractionallySizedBox(
                     alignment: Alignment.centerLeft,
@@ -446,7 +446,7 @@ class HomeScreen extends StatelessWidget {
                         color: BrutalistTheme.accentGreen,
                         borderRadius: BorderRadius.circular(4),
                         border: const Border(
-                          right: BorderSide(color: BrutalistTheme.black, width: 3),
+                          right: BorderSide(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
                         ),
                       ),
                     ),
@@ -462,10 +462,10 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               decoration: BoxDecoration(
                 color: btnBg,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: BrutalistTheme.black, width: 3),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
                 boxShadow: const [
-                  BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4)),
+                  BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset)),
                 ],
               ),
               child: Text(

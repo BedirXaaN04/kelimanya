@@ -260,9 +260,9 @@ class _LoginScreenState extends State<LoginScreen> {
       decoration: BoxDecoration(
         color: BrutalistTheme.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: BrutalistTheme.black, width: 4),
+        border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
         boxShadow: const [
-          BoxShadow(color: BrutalistTheme.black, offset: Offset(6, 6), blurRadius: 0),
+          BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset), blurRadius: 0),
         ],
       ),
       child: Column(
@@ -321,8 +321,8 @@ class _LoginScreenState extends State<LoginScreen> {
         decoration: BoxDecoration(
           color: isActive ? BrutalistTheme.accentYellow : BrutalistTheme.grey,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: BrutalistTheme.black, width: 3),
-          boxShadow: isActive ? [] : const [BoxShadow(color: BrutalistTheme.black, offset: Offset(3, 3))],
+          border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
+          boxShadow: isActive ? [] : const [BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset))],
         ),
         transform: isActive ? Matrix4.translationValues(3, 3, 0) : Matrix4.identity(),
         child: Center(child: Text(label, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14))),
@@ -350,9 +350,9 @@ class _LoginScreenState extends State<LoginScreen> {
           filled: true,
           fillColor: const Color(0xFFF1F2F6),
           contentPadding: const EdgeInsets.all(13),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: const BorderSide(color: BrutalistTheme.black, width: 3)),
-          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: const BorderSide(color: BrutalistTheme.black, width: 3)),
-          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: const BorderSide(color: BrutalistTheme.black, width: 3)),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: const BorderSide(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth)),
+          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: const BorderSide(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth)),
+          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: const BorderSide(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth)),
         ),
       ),
     );
@@ -388,8 +388,8 @@ class _LoginScreenState extends State<LoginScreen> {
         decoration: BoxDecoration(
           color: bg,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: BrutalistTheme.black, width: 4),
-          boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(6, 6))],
+          border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
+          boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset))],
         ),
         child: Center(child: Text(label, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: textColor))),
       ),
@@ -405,8 +405,8 @@ class _LoginScreenState extends State<LoginScreen> {
         decoration: BoxDecoration(
           color: const Color(0xFFDB4437),
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: BrutalistTheme.black, width: 3),
-          boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4))],
+          border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
+          boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset))],
         ),
         child: const Center(
           child: Text("G  Google ile Giriş Yap", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: Colors.white)),
@@ -424,8 +424,8 @@ class _LoginScreenState extends State<LoginScreen> {
         decoration: BoxDecoration(
           color: BrutalistTheme.nightBg,
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: BrutalistTheme.black, width: 3),
-          boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(4, 4))],
+          border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
+          boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset))],
         ),
         child: const Center(
           child: Text("👤 MİSAFİR OLARAK OYNA", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w900, color: BrutalistTheme.white)),

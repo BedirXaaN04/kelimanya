@@ -12,8 +12,8 @@ class BrutalistTheme {
   static const Color white = Color(0xFFffffff);
   static const Color black = Color(0xFF000000);
 
-  static const double borderWidth = 4.0;
-  static const double shadowOffset = 4.0;
+  static const double borderWidth = 5.0; // V2: Thicker cartoon borders
+  static const double shadowOffset = 8.0; // V2: Deeper pop-out shadows
 
   static ThemeData get theme {
     return ThemeData(
@@ -47,7 +47,7 @@ class BrutalistBox extends StatelessWidget {
     this.backgroundColor = BrutalistTheme.white,
     this.padding = 20.0,
     this.margin,
-    this.borderRadius = 12.0,
+    this.borderRadius = 16.0, // V2: Softer, friendlier corners
     this.borderColor = BrutalistTheme.black,
     this.borderStyle = BorderStyle.solid,
   });
@@ -135,7 +135,7 @@ class BrutalistButtonState extends State<BrutalistButton> {
         ),
         decoration: BoxDecoration(
           color: widget.backgroundColor,
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(16.0), // V2: Softer button corners
           border: Border.all(
             color: BrutalistTheme.black,
             width: BrutalistTheme.borderWidth,

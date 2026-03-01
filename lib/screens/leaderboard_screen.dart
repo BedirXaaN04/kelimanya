@@ -52,12 +52,12 @@ class LeaderboardScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: index == 0 ? BrutalistTheme.accentYellow : index == 1 ? Colors.grey.shade300 : index == 2 ? Colors.orange.shade300 : Colors.white,
-                    border: Border.all(color: BrutalistTheme.black, width: 3),
+                    border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: const [
                       BoxShadow(
                         color: BrutalistTheme.black,
-                        offset: Offset(4, 4),
+                        offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset),
                       )
                     ],
                   ),

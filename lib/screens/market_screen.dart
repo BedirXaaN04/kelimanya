@@ -63,9 +63,9 @@ class MarketScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
             color: BrutalistTheme.accentYellow,
-            border: Border.all(color: BrutalistTheme.black, width: 3),
+            border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
             borderRadius: BorderRadius.circular(8),
-            boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(2, 2))],
+            boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset))],
           ),
           child: Row(
             children: [
@@ -130,8 +130,8 @@ class MarketScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: BrutalistTheme.grey,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: BrutalistTheme.black, width: 4),
-        boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(6, 6))],
+        border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
+        boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset))],
       ),
       child: Column(
         children: [
@@ -142,7 +142,7 @@ class MarketScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: BrutalistTheme.accentYellow,
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: BrutalistTheme.black, width: 3),
+              border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
             ),
             child: const Text(
               "YAKINDA",
@@ -170,8 +170,8 @@ class MarketScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: BrutalistTheme.grey,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: BrutalistTheme.black, width: 4),
-        boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(6, 6))],
+        border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
+        boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset))],
       ),
       child: Column(
         children: [
@@ -182,7 +182,7 @@ class MarketScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: BrutalistTheme.accentRed,
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: BrutalistTheme.black, width: 3),
+              border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
             ),
             child: const Text(
               "YAKINDA",
@@ -232,8 +232,8 @@ class _MarketCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: BrutalistTheme.black, width: 4),
-          boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(6, 6))],
+          border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
+          boxShadow: const [BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset))],
         ),
         child: Row(
           children: [
@@ -243,7 +243,7 @@ class _MarketCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: BrutalistTheme.white,
                 shape: BoxShape.circle,
-                border: Border.all(color: BrutalistTheme.black, width: 3),
+                border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
               ),
               child: Center(child: Text(icon, style: const TextStyle(fontSize: 30))),
             ),
@@ -264,7 +264,7 @@ class _MarketCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: BrutalistTheme.accentYellow,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: BrutalistTheme.black, width: 3),
+                border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
               ),
               child: Column(
                 children: [

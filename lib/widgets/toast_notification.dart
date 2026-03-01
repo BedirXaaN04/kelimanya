@@ -22,11 +22,11 @@ class ToastNotification extends StatelessWidget {
               decoration: BoxDecoration(
                 color: BrutalistTheme.accentPurple,
                 borderRadius: BorderRadius.circular(26),
-                border: Border.all(color: BrutalistTheme.black, width: 3),
+                border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
                 boxShadow: const [
                   BoxShadow(
                     color: BrutalistTheme.black,
-                    offset: Offset(4, 4),
+                    offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset),
                     blurRadius: 0,
                   ),
                 ],

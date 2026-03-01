@@ -143,7 +143,7 @@ class _InteractiveWheelState extends State<InteractiveWheel> {
                   shape: BoxShape.circle,
                   border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth),
                   boxShadow: const [
-                    BoxShadow(color: BrutalistTheme.black, offset: Offset(7, 7)),
+                    BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset)),
                   ],
                 ),
               ),
@@ -188,9 +188,9 @@ class _InteractiveWheelState extends State<InteractiveWheel> {
                     decoration: BoxDecoration(
                       color: isSelected ? BrutalistTheme.white : BrutalistTheme.accentYellow,
                       shape: BoxShape.circle,
-                      border: Border.all(color: BrutalistTheme.black, width: 3), // Slightly thinner border
+                      border: Border.all(color: BrutalistTheme.black, width: BrutalistTheme.borderWidth), // Slightly thinner border
                       boxShadow: isSelected ? [] : const [
-                        BoxShadow(color: BrutalistTheme.black, offset: Offset(3, 3)),
+                        BoxShadow(color: BrutalistTheme.black, offset: Offset(BrutalistTheme.shadowOffset, BrutalistTheme.shadowOffset)),
                       ],
                     ),
                     transform: isSelected ? Matrix4.translationValues(3.0, 3.0, 0.0) : Matrix4.identity(),
